@@ -1,6 +1,7 @@
 """Asynchronous Python client for the WAQI API."""
 import asyncio
 from dataclasses import dataclass
+from importlib import metadata
 from typing import Any, cast
 
 import async_timeout
@@ -59,7 +60,7 @@ class WAQIClient:
             WAQIError: Received an unexpected response from the WAQI API.
             WAQIAuthenticationError: Used token is invalid.
         """
-        version = "2.0.0"
+        version = metadata.version(__package__)
         url = URL.build(
             scheme="https",
             host=self.api_host,
@@ -75,6 +76,9 @@ class WAQIClient:
             self.session = ClientSession()
             self._close_session = True
 
+        if data is None:  # pragma: no cover
+            data = {}
+        data["token"] = self._token
         try:
             async with async_timeout.timeout(self.request_timeout):
                 response = await self.session.request(
@@ -97,7 +101,7 @@ class WAQIClient:
             )
 
         response_data = cast(dict[str, Any], await response.json())
-        if response_data["status"] == "error" and response_data == "Invalid key":
+        if response_data["status"] == "error" and response_data["data"] == "Invalid key":
             raise WAQIAuthenticationError
         return response_data
 
