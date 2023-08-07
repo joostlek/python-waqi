@@ -72,6 +72,7 @@ class Station(Location):
 class WAQIExtendedAirQuality(BaseModel):
     """Represents extended air quality data."""
 
+    carbon_monoxide: float | None = Field(None, alias="co")
     humidity: float | None = Field(None, alias="h")
     nitrogen_dioxide: float | None = Field(None, alias="no2")
     ozone: float | None = Field(None, alias="o3")
@@ -82,6 +83,7 @@ class WAQIExtendedAirQuality(BaseModel):
     temperature: float | None = Field(None, alias="t")
 
     @validator(
+        "carbon_monoxide",
         "humidity",
         "nitrogen_dioxide",
         "ozone",

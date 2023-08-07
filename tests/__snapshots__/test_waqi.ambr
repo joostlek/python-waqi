@@ -25,6 +25,7 @@
       'name': 'Klundert, Brabant',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 71.6,
       'nitrogen_dioxide': 1.6,
       'ozone': None,
@@ -63,6 +64,7 @@
       'name': 'Klundert, Brabant',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 71.6,
       'nitrogen_dioxide': 1.6,
       'ozone': None,
@@ -96,6 +98,7 @@
       'name': 'Snelweg, Breukelen',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 77.5,
       'nitrogen_dioxide': 3.9,
       'ozone': 29.2,
@@ -129,6 +132,7 @@
       'name': 'Griftpark, Utrecht',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 73.2,
       'nitrogen_dioxide': 0.7,
       'ozone': 29.4,
@@ -162,6 +166,7 @@
       'name': 'de Jongweg, Utrecht',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 80.0,
       'nitrogen_dioxide': 2.3,
       'ozone': 29.4,
@@ -195,6 +200,7 @@
       'name': 'Amsterdam',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': 2.3,
       'humidity': 69.5,
       'nitrogen_dioxide': 0.7,
       'ozone': 26.4,
@@ -233,6 +239,7 @@
       'name': 'Klundert, Brabant',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 71.6,
       'nitrogen_dioxide': 2.0,
       'ozone': None,
@@ -271,6 +278,7 @@
       'name': 'Klundert, Brabant',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 71.6,
       'nitrogen_dioxide': 2.0,
       'ozone': None,
@@ -309,6 +317,7 @@
       'name': 'Klundert, Brabant',
     }),
     'extended_air_quality': dict({
+      'carbon_monoxide': None,
       'humidity': 71.6,
       'nitrogen_dioxide': 2.0,
       'ozone': None,
