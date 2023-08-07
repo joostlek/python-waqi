@@ -99,9 +99,7 @@ poetry run pytest
 
 ## Authors & contributors
 
-The original setup of this repository is heavily inspired by [Franck Nijhof][frenck].
-
-The content is by [Joost Lekkerkerker][joostlek]
+The content is by [Joost Lekkerkerker][joostlek].
 
 For a full list of all authors and contributors,
 check [the contributor's page][contributors].
