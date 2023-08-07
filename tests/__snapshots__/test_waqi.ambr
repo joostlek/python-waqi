@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_states[failing_klundert]
+# name: test_by_city[failing_klundert]
   dict({
     'air_quality_index': None,
     'attributions': list([
@@ -37,7 +37,7 @@
     'station_id': 6337,
   })
 # ---
-# name: test_states[klundert]
+# name: test_by_city[klundert]
   dict({
     'air_quality_index': 4,
     'attributions': list([
@@ -75,7 +75,7 @@
     'station_id': 6337,
   })
 # ---
-# name: test_states[maarssen]
+# name: test_by_city[maarssen]
   dict({
     'air_quality_index': 29,
     'attributions': list([
@@ -108,7 +108,7 @@
     'station_id': 4586,
   })
 # ---
-# name: test_states[utrecht]
+# name: test_by_city[utrecht]
   dict({
     'air_quality_index': 29,
     'attributions': list([
