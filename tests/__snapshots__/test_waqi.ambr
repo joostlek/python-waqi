@@ -24,6 +24,7 @@
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'name': 'Klundert, Brabant',
     }),
+    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
@@ -35,6 +36,7 @@
       'sulphur_dioxide': None,
       'temperature': 18.1,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 18, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
   })
 # ---
@@ -63,6 +65,7 @@
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'name': 'Klundert, Brabant',
     }),
+    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
@@ -74,6 +77,7 @@
       'sulphur_dioxide': None,
       'temperature': 18.1,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 18, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
   })
 # ---
@@ -97,6 +101,7 @@
       'external_url': 'https://aqicn.org/city/netherland/breukelen/snelweg',
       'name': 'Snelweg, Breukelen',
     }),
+    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 77.5,
@@ -108,6 +113,7 @@
       'sulphur_dioxide': None,
       'temperature': 16.9,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 18, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 4586,
   })
 # ---
@@ -131,6 +137,7 @@
       'external_url': 'https://aqicn.org/city/netherland/utrecht/griftpark',
       'name': 'Griftpark, Utrecht',
     }),
+    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 73.2,
@@ -142,6 +149,7 @@
       'sulphur_dioxide': 0.1,
       'temperature': 17.5,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6332,
   })
 # ---
@@ -165,6 +173,7 @@
       'external_url': 'https://aqicn.org/city/netherland/utrecht/de-jongweg',
       'name': 'de Jongweg, Utrecht',
     }),
+    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 80.0,
@@ -176,6 +185,7 @@
       'sulphur_dioxide': None,
       'temperature': 16.0,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 4584,
   })
 # ---
@@ -199,6 +209,7 @@
       'external_url': 'https://aqicn.org/city/amsterdam',
       'name': 'Amsterdam',
     }),
+    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
     'extended_air_quality': dict({
       'carbon_monoxide': 2.3,
       'humidity': 69.5,
@@ -210,6 +221,7 @@
       'sulphur_dioxide': 0.2,
       'temperature': 17.5,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 5771,
   })
 # ---
@@ -238,6 +250,7 @@
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'name': 'Klundert, Brabant',
     }),
+    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
@@ -249,6 +262,7 @@
       'sulphur_dioxide': None,
       'temperature': 18.1,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
   })
 # ---
@@ -277,6 +291,7 @@
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'name': 'Klundert, Brabant',
     }),
+    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
@@ -288,6 +303,7 @@
       'sulphur_dioxide': None,
       'temperature': 18.1,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
   })
 # ---
@@ -316,6 +332,7 @@
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'name': 'Klundert, Brabant',
     }),
+    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
@@ -327,6 +344,7 @@
       'sulphur_dioxide': None,
       'temperature': 18.1,
     }),
+    'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
   })
 # ---

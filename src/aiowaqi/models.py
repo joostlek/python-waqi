@@ -3,6 +3,9 @@ from __future__ import annotations
 
 from contextlib import suppress
 from dataclasses import dataclass
+from datetime import datetime
+from enum import Enum
+from typing import Any
 
 try:
     from pydantic.v1 import BaseModel, Field, validator
@@ -12,6 +15,17 @@ except ImportError:  # pragma: no cover
         Field,
         validator,
     )
+
+
+class Pollutant(str, Enum):
+    """Enum of pollutants."""
+
+    CARBON_MONOXIDE = "co"
+    NITROGEN_DIOXIDE = "no2"
+    OZONE = "o3"
+    SULPHUR_DIOXIDE = "so2"
+    PM10 = "pm10"
+    PM25 = "pm25"
 
 
 class Attribution(BaseModel):
@@ -109,6 +123,8 @@ class WAQIAirQuality(BaseModel):
     attributions: list[Attribution] = Field([])
     city: City = Field(...)
     extended_air_quality: WAQIExtendedAirQuality = Field(..., alias="iaqi")
+    dominant_pollutant: Pollutant = Field(..., alias="dominentpol")
+    measured_at: datetime = Field(..., alias="time")
 
     @validator(
         "air_quality_index",
@@ -121,6 +137,16 @@ class WAQIAirQuality(BaseModel):
         with suppress(ValueError):
             return int(value)
         return None
+
+    @validator(
+        "measured_at",
+        pre=True,
+        allow_reuse=True,
+    )
+    @classmethod
+    def get_datetime(cls, value: dict[str, Any]) -> datetime:
+        """Get measuring date."""
+        return datetime.fromisoformat(value["iso"])
 
 
 class WAQISearchResult(BaseModel):
