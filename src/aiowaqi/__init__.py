@@ -1,8 +1,14 @@
 """Asynchronous Python client for the WAQI API."""
 
-from .exceptions import WAQIConnectionError, WAQIAuthenticationError, WAQIError
+from .exceptions import WAQIAuthenticationError, WAQIConnectionError, WAQIError
+from .models import (
+    Attribution,
+    City,
+    Coordinates,
+    WAQIAirQuality,
+    WAQIExtendedAirQuality,
+)
 from .waqi import WAQIClient
-from .models import Attribution, City, Coordinates, WAQIAirQuality, WAQIExtendedAirQuality
 
 __all__ = [
     "WAQIError",
@@ -13,5 +19,5 @@ __all__ = [
     "City",
     "Coordinates",
     "WAQIExtendedAirQuality",
-    "WAQIAirQuality"
+    "WAQIAirQuality",
 ]

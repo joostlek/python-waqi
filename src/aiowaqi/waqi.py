@@ -1,7 +1,6 @@
 """Asynchronous Python client for the WAQI API."""
 import asyncio
 from dataclasses import dataclass
-from importlib import metadata
 from typing import Any, cast
 
 import async_timeout
@@ -9,8 +8,13 @@ from aiohttp import ClientSession
 from aiohttp.hdrs import METH_GET
 from yarl import URL
 
+from .exceptions import (
+    WAQIAuthenticationError,
+    WAQIConnectionError,
+    WAQIError,
+    WAQIUnknownCityError,
+)
 from .models import WAQIAirQuality
-from .exceptions import WAQIConnectionError, WAQIError, WAQIAuthenticationError, WAQIUnknownCityError
 
 
 @dataclass
@@ -24,7 +28,7 @@ class WAQIClient:
     _close_session: bool = False
 
     def authenticate(self, token: str) -> None:
-        """Authenticate the user with a token"""
+        """Authenticate the user with a token."""
         self._token = token
 
     async def _request(
@@ -93,19 +97,17 @@ class WAQIClient:
             )
 
         response_data = cast(dict[str, Any], await response.json())
-        if response_data["status"] == "error":
-            if response_data == "Invalid key":
-                raise WAQIAuthenticationError()
+        if response_data["status"] == "error" and response_data == "Invalid key":
+            raise WAQIAuthenticationError
         return response_data
 
     async def get_by_city(self, city: str) -> WAQIAirQuality:
         """Get air quality information for a given city."""
         response = await self._request(f"feed/{city}")
-        if response["status"] == "error":
-            if response["data"] == "Unknown station":
-                raise WAQIUnknownCityError(f"Could not find city {city}")
+        if response["status"] == "error" and response["data"] == "Unknown station":
+            msg = f"Could not find city {city}"
+            raise WAQIUnknownCityError(msg)
         return WAQIAirQuality.parse_obj(response["data"])
-
 
     async def close(self) -> None:
         """Close open client session."""

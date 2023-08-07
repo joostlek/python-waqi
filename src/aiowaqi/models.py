@@ -7,7 +7,11 @@ from dataclasses import dataclass
 try:
     from pydantic.v1 import BaseModel, Field, validator
 except ImportError:  # pragma: no cover
-    from pydantic import BaseModel, Field, validator  # type: ignore[assignment] # pragma: no cover
+    from pydantic import (  # type: ignore[assignment] # pragma: no cover
+        BaseModel,
+        Field,
+        validator,
+    )
 
 
 class Attribution(BaseModel):
@@ -24,6 +28,7 @@ class Attribution(BaseModel):
     )
     @classmethod
     def strip_name(cls, value: str) -> str:
+        """Strip name off attribution name."""
         return value.strip()
 
 
@@ -33,6 +38,7 @@ class Coordinates:
 
     latitude: float
     longitude: float
+
 
 class City(BaseModel):
     """Represents a city object."""
@@ -48,12 +54,16 @@ class City(BaseModel):
     )
     @classmethod
     def parse_coordinates(cls, value: list[float]) -> Coordinates:
+        """Parse coordinates to object."""
         return Coordinates(
             latitude=value[0],
             longitude=value[1],
         )
 
+
 class WAQIExtendedAirQuality(BaseModel):
+    """Represents extended air quality data."""
+
     humidity: float | None = Field(None, alias="h")
     nitrogen_dioxide: float | None = Field(None, alias="no2")
     ozone: float | None = Field(None, alias="o3")
@@ -77,6 +87,7 @@ class WAQIExtendedAirQuality(BaseModel):
     )
     @classmethod
     def get_value(cls, value: dict[str, float]) -> float:
+        """Get extra air quality value."""
         return value["v"]
 
 
@@ -96,10 +107,10 @@ class WAQIAirQuality(BaseModel):
     )
     @classmethod
     def get_value(cls, value: int | str) -> int | None:
+        """Handle invalid string."""
         with suppress(ValueError):
             return int(value)
         return None
-
 
 
 City.update_forward_refs()

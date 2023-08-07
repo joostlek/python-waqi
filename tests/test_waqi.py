@@ -1,13 +1,12 @@
 """Tests for the WAQI Library."""
-import asyncio
 
 import aiohttp
 import pytest
-from aiohttp import BasicAuth, ClientError
-from aiohttp.web_request import BaseRequest
-from aresponses import Response, ResponsesMockServer
+from aresponses import ResponsesMockServer
 from syrupy import SnapshotAssertion
-from src.aiowaqi import WAQIClient, WAQIAirQuality
+
+from aiowaqi import WAQIAirQuality, WAQIClient
+
 from . import load_fixture
 
 WAQI_URL = "api.waqi.info"
@@ -20,12 +19,12 @@ WAQI_URL = "api.waqi.info"
         "maarssen",
         "klundert",
         "failing_klundert",
-    ]
+    ],
 )
 async def test_states(
     aresponses: ResponsesMockServer,
-        city: str,
-    snapshot: SnapshotAssertion
+    city: str,
+    snapshot: SnapshotAssertion,
 ) -> None:
     """Test retrieving states."""
     aresponses.add(
