@@ -40,8 +40,8 @@ class Coordinates:
     longitude: float
 
 
-class City(BaseModel):
-    """Represents a city object."""
+class Location(BaseModel):
+    """Represents a location object."""
 
     external_url: str = Field(..., alias="url")
     name: str = Field(...)
@@ -59,6 +59,14 @@ class City(BaseModel):
             latitude=value[0],
             longitude=value[1],
         )
+
+
+class City(Location):
+    """Represents a city object."""
+
+
+class Station(Location):
+    """Represents a station object."""
 
 
 class WAQIExtendedAirQuality(BaseModel):
@@ -99,6 +107,26 @@ class WAQIAirQuality(BaseModel):
     attributions: list[Attribution] = Field([])
     city: City = Field(...)
     extended_air_quality: WAQIExtendedAirQuality = Field(..., alias="iaqi")
+
+    @validator(
+        "air_quality_index",
+        pre=True,
+        allow_reuse=True,
+    )
+    @classmethod
+    def get_value(cls, value: int | str) -> int | None:
+        """Handle invalid string."""
+        with suppress(ValueError):
+            return int(value)
+        return None
+
+
+class WAQISearchResult(BaseModel):
+    """Represents a search result from the WAQI api."""
+
+    air_quality_index: int | None = Field(None, alias="aqi")
+    station_id: int = Field(..., alias="uid")
+    station: Station = Field(...)
 
     @validator(
         "air_quality_index",

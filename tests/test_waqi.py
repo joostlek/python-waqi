@@ -155,3 +155,34 @@ async def test_timeout(aresponses: ResponsesMockServer) -> None:
         with pytest.raises(WAQIConnectionError):
             assert await waqi.get_by_city("utrecht")
         await waqi.close()
+
+
+@pytest.mark.parametrize(
+    "keyword",
+    [
+        "klundert",
+        "failing_klundert",
+        "unknown",
+    ],
+)
+async def test_search(
+    aresponses: ResponsesMockServer,
+    keyword: str,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test searching stations."""
+    aresponses.add(
+        WAQI_URL,
+        f"/search/?keyword={keyword}&token=test",
+        "GET",
+        aresponses.Response(
+            status=200,
+            headers={"Content-Type": "application/json"},
+            text=load_fixture(f"search_{keyword}.json"),
+        ),
+        match_querystring=True,
+    )
+    async with WAQIClient() as waqi:
+        waqi.authenticate("test")
+        response = await waqi.search(keyword)
+        assert response == snapshot
