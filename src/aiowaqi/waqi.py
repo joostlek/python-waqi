@@ -138,6 +138,12 @@ class WAQIClient:
         response = await self._request(f"feed/geo:{latitude};{longitude}")
         return WAQIAirQuality.parse_obj(response["data"])
 
+    async def get_by_ip(
+        self,
+    ) -> WAQIAirQuality:
+        """Get the nearest air quality measuring station according to WAQI."""
+        return await self.get_by_name("here")
+
     async def search(self, keyword: str) -> list[WAQISearchResult]:
         """Search for stations with a keyword."""
         response = await self._request("search/", data={"keyword": keyword})

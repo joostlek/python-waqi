@@ -307,3 +307,24 @@ async def test_get_by_coordinates(
         waqi.authenticate("test")
         response = await waqi.get_by_coordinates(52.105031, 5.124464)
         assert response == snapshot
+
+
+async def test_get_by_ip(
+    aresponses: ResponsesMockServer,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test getting measuring station via ip."""
+    aresponses.add(
+        WAQI_URL,
+        "/feed/here",
+        "GET",
+        aresponses.Response(
+            status=200,
+            headers={"Content-Type": "application/json"},
+            text=load_fixture("here.json"),
+        ),
+    )
+    async with WAQIClient() as waqi:
+        waqi.authenticate("test")
+        response = await waqi.get_by_ip()
+        assert response == snapshot

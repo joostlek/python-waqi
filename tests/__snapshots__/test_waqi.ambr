@@ -174,6 +174,39 @@
     'station_id': 4584,
   })
 # ---
+# name: test_get_by_ip
+  dict({
+    'air_quality_index': 26,
+    'attributions': list([
+      dict({
+        'logo': 'Netherland-RIVM.png',
+        'name': 'RIVM - Rijksinstituut voor Volksgezondheid en Milieum, Landelijk Meetnet Luchtkwaliteit',
+        'url': 'http://www.luchtmeetnet.nl/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': Coordinates(latitude=52.3702157, longitude=4.8951679),
+      'external_url': 'https://aqicn.org/city/amsterdam',
+      'name': 'Amsterdam',
+    }),
+    'extended_air_quality': dict({
+      'humidity': 69.5,
+      'nitrogen_dioxide': 0.7,
+      'ozone': 26.4,
+      'pm10': 9.0,
+      'pm25': 15.0,
+      'pressure': 1016.4,
+      'sulphur_dioxide': 0.2,
+      'temperature': 17.5,
+    }),
+    'station_id': 5771,
+  })
+# ---
 # name: test_get_by_name[failing_klundert]
   dict({
     'air_quality_index': None,
