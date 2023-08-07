@@ -125,6 +125,10 @@ class WAQIClient:
             raise WAQIUnknownStationError(msg)
         return WAQIAirQuality.parse_obj(response["data"])
 
+    async def get_by_station_number(self, station_number: int) -> WAQIAirQuality:
+        """Get air quality measuring station by station number."""
+        return await self.get_by_name(f"@{station_number}")
+
     async def search(self, keyword: str) -> list[WAQISearchResult]:
         """Search for stations with a keyword."""
         response = await self._request("search/", data={"keyword": keyword})
