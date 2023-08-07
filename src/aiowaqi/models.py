@@ -23,7 +23,7 @@ class Pollutant(str, Enum):
     CARBON_MONOXIDE = "co"
     NITROGEN_DIOXIDE = "no2"
     OZONE = "o3"
-    SULPHUR_DIOXIDE = "so2"
+    SULFUR_DIOXIDE = "so2"
     PM10 = "pm10"
     PM25 = "pm25"
 
@@ -91,7 +91,7 @@ class WAQIExtendedAirQuality(BaseModel):
     nitrogen_dioxide: float | None = Field(None, alias="no2")
     ozone: float | None = Field(None, alias="o3")
     pressure: float | None = Field(None, alias="p")
-    sulphur_dioxide: float | None = Field(None, alias="so2")
+    sulfur_dioxide: float | None = Field(None, alias="so2")
     pm10: float | None = Field(None)
     pm25: float | None = Field(None)
     temperature: float | None = Field(None, alias="t")
@@ -102,7 +102,7 @@ class WAQIExtendedAirQuality(BaseModel):
         "nitrogen_dioxide",
         "ozone",
         "pressure",
-        "sulphur_dioxide",
+        "sulfur_dioxide",
         "pm10",
         "pm25",
         "temperature",
