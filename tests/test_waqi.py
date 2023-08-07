@@ -7,7 +7,13 @@ from aiohttp.web_request import BaseRequest
 from aresponses import Response, ResponsesMockServer
 from syrupy import SnapshotAssertion
 
-from aiowaqi import WAQIAirQuality, WAQIClient, WAQIConnectionError, WAQIError, WAQIAuthenticationError
+from aiowaqi import (
+    WAQIAirQuality,
+    WAQIAuthenticationError,
+    WAQIClient,
+    WAQIConnectionError,
+    WAQIError,
+)
 
 from . import load_fixture
 
@@ -47,6 +53,7 @@ async def test_by_city(
         assert response == snapshot
         await waqi.close()
 
+
 async def test_own_session(
     aresponses: ResponsesMockServer,
 ) -> None:
@@ -65,6 +72,7 @@ async def test_own_session(
         waqi.authenticate("test")
         await waqi.get_by_city("utrecht")
         assert waqi.session is not None
+
 
 async def test_unexpected_server_response(
     aresponses: ResponsesMockServer,
@@ -85,6 +93,7 @@ async def test_unexpected_server_response(
         with pytest.raises(WAQIError):
             assert await waqi.get_by_city("utrecht")
 
+
 async def test_unknown_city(
     aresponses: ResponsesMockServer,
 ) -> None:
@@ -104,6 +113,7 @@ async def test_unknown_city(
         with pytest.raises(WAQIError):
             assert await waqi.get_by_city("unknown")
 
+
 async def test_unauthenticated(
     aresponses: ResponsesMockServer,
 ) -> None:
@@ -122,7 +132,6 @@ async def test_unauthenticated(
         waqi.authenticate("test")
         with pytest.raises(WAQIAuthenticationError):
             assert await waqi.get_by_city("utrecht")
-
 
 
 async def test_timeout(aresponses: ResponsesMockServer) -> None:

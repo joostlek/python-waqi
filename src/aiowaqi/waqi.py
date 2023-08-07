@@ -101,7 +101,10 @@ class WAQIClient:
             )
 
         response_data = cast(dict[str, Any], await response.json())
-        if response_data["status"] == "error" and response_data["data"] == "Invalid key":
+        if (
+            response_data["status"] == "error"
+            and response_data["data"] == "Invalid key"
+        ):
             raise WAQIAuthenticationError
         return response_data
 
