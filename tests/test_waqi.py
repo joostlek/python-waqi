@@ -286,3 +286,24 @@ async def test_get_unknown_by_station_number(
         waqi.authenticate("test")
         with pytest.raises(WAQIUnknownStationError):
             await waqi.get_by_station_number(0)
+
+
+async def test_get_by_coordinates(
+    aresponses: ResponsesMockServer,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test getting measuring station via coordinates."""
+    aresponses.add(
+        WAQI_URL,
+        "/feed/geo:52.105031;5.124464",
+        "GET",
+        aresponses.Response(
+            status=200,
+            headers={"Content-Type": "application/json"},
+            text=load_fixture("coordinates.json"),
+        ),
+    )
+    async with WAQIClient() as waqi:
+        waqi.authenticate("test")
+        response = await waqi.get_by_coordinates(52.105031, 5.124464)
+        assert response == snapshot
