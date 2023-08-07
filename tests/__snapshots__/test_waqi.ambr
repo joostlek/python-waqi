@@ -141,6 +141,39 @@
     'station_id': 6332,
   })
 # ---
+# name: test_get_by_coordinates
+  dict({
+    'air_quality_index': 29,
+    'attributions': list([
+      dict({
+        'logo': 'Netherland-RIVM.png',
+        'name': 'RIVM - Rijksinstituut voor Volksgezondheid en Milieum, Landelijk Meetnet Luchtkwaliteit',
+        'url': 'http://www.luchtmeetnet.nl/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': Coordinates(latitude=52.105031, longitude=5.124464),
+      'external_url': 'https://aqicn.org/city/netherland/utrecht/de-jongweg',
+      'name': 'de Jongweg, Utrecht',
+    }),
+    'extended_air_quality': dict({
+      'humidity': 80.0,
+      'nitrogen_dioxide': 2.3,
+      'ozone': 29.4,
+      'pm10': 12.0,
+      'pm25': 17.0,
+      'pressure': 1008.8,
+      'sulphur_dioxide': None,
+      'temperature': 16.0,
+    }),
+    'station_id': 4584,
+  })
+# ---
 # name: test_get_by_name[failing_klundert]
   dict({
     'air_quality_index': None,

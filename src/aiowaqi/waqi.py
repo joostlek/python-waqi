@@ -129,6 +129,15 @@ class WAQIClient:
         """Get air quality measuring station by station number."""
         return await self.get_by_name(f"@{station_number}")
 
+    async def get_by_coordinates(
+        self,
+        latitude: float,
+        longitude: float,
+    ) -> WAQIAirQuality:
+        """Get nearest air quality measuring station by coordinates."""
+        response = await self._request(f"feed/geo:{latitude};{longitude}")
+        return WAQIAirQuality.parse_obj(response["data"])
+
     async def search(self, keyword: str) -> list[WAQISearchResult]:
         """Search for stations with a keyword."""
         response = await self._request("search/", data={"keyword": keyword})
