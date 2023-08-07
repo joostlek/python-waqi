@@ -13,5 +13,9 @@ class WAQIUnknownCityError(WAQIError):
     """WAQI unknown city exception."""
 
 
+class WAQIUnknownStationError(WAQIError):
+    """WAQI unknown station exception."""
+
+
 class WAQIAuthenticationError(WAQIError):
     """WAQI authentication exception."""

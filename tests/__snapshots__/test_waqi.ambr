@@ -141,6 +141,82 @@
     'station_id': 6332,
   })
 # ---
+# name: test_get_by_name[failing_klundert]
+  dict({
+    'air_quality_index': None,
+    'attributions': list([
+      dict({
+        'logo': 'Netherland-RIVM.png',
+        'name': 'RIVM - Rijksinstituut voor Volksgezondheid en Milieum, Landelijk Meetnet Luchtkwaliteit',
+        'url': 'http://www.luchtmeetnet.nl/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'Provincie Noord Brabant',
+        'url': 'http://www.brabantluchtmeet.net/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'name': 'Klundert, Brabant',
+    }),
+    'extended_air_quality': dict({
+      'humidity': 71.6,
+      'nitrogen_dioxide': 2.0,
+      'ozone': None,
+      'pm10': 5.0,
+      'pm25': None,
+      'pressure': 1018.0,
+      'sulphur_dioxide': None,
+      'temperature': 18.1,
+    }),
+    'station_id': 6337,
+  })
+# ---
+# name: test_get_by_name[klundert]
+  dict({
+    'air_quality_index': 5,
+    'attributions': list([
+      dict({
+        'logo': 'Netherland-RIVM.png',
+        'name': 'RIVM - Rijksinstituut voor Volksgezondheid en Milieum, Landelijk Meetnet Luchtkwaliteit',
+        'url': 'http://www.luchtmeetnet.nl/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'Provincie Noord Brabant',
+        'url': 'http://www.brabantluchtmeet.net/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'name': 'Klundert, Brabant',
+    }),
+    'extended_air_quality': dict({
+      'humidity': 71.6,
+      'nitrogen_dioxide': 2.0,
+      'ozone': None,
+      'pm10': 5.0,
+      'pm25': None,
+      'pressure': 1018.0,
+      'sulphur_dioxide': None,
+      'temperature': 18.1,
+    }),
+    'station_id': 6337,
+  })
+# ---
 # name: test_search[failing_klundert]
   list([
     WAQISearchResult(air_quality_index=None, station_id=6337, station=Station(external_url='netherland/brabant/klundert', name='Klundert, Brabant', coordinates=Coordinates(latitude=51.6689355, longitude=4.541659))),

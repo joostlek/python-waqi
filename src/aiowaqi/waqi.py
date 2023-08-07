@@ -14,6 +14,7 @@ from .exceptions import (
     WAQIConnectionError,
     WAQIError,
     WAQIUnknownCityError,
+    WAQIUnknownStationError,
 )
 from .models import WAQIAirQuality, WAQISearchResult
 
@@ -114,6 +115,14 @@ class WAQIClient:
         if response["status"] == "error" and response["data"] == "Unknown station":
             msg = f"Could not find city {city}"
             raise WAQIUnknownCityError(msg)
+        return WAQIAirQuality.parse_obj(response["data"])
+
+    async def get_by_name(self, name: str) -> WAQIAirQuality:
+        """Get air quality measuring station by name."""
+        response = await self._request(f"feed/{name}")
+        if response["status"] == "error" and response["data"] == "Unknown station":
+            msg = f"Could not find station {name}"
+            raise WAQIUnknownStationError(msg)
         return WAQIAirQuality.parse_obj(response["data"])
 
     async def search(self, keyword: str) -> list[WAQISearchResult]:
