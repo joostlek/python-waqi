@@ -3,11 +3,11 @@
     "data": [
         {
             "uid": 6337,
-            "aqi": "3",
+            "aqi": "4",
             "time": {
                 "tz": "+02:00",
-                "stime": "2023-08-07 16:00:00",
-                "vtime": 1691416800
+                "stime": "2023-08-07 18:00:00",
+                "vtime": 1691424000
             },
             "station": {
                 "name": "Klundert, Brabant",

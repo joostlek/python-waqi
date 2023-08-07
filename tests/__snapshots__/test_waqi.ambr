@@ -141,3 +141,17 @@
     'station_id': 6332,
   })
 # ---
+# name: test_search[failing_klundert]
+  list([
+    WAQISearchResult(air_quality_index=None, station_id=6337, station=Station(external_url='netherland/brabant/klundert', name='Klundert, Brabant', coordinates=Coordinates(latitude=51.6689355, longitude=4.541659))),
+  ])
+# ---
+# name: test_search[klundert]
+  list([
+    WAQISearchResult(air_quality_index=4, station_id=6337, station=Station(external_url='netherland/brabant/klundert', name='Klundert, Brabant', coordinates=Coordinates(latitude=51.6689355, longitude=4.541659))),
+  ])
+# ---
+# name: test_search[unknown]
+  list([
+  ])
+# ---

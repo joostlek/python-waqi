@@ -1,0 +1,22 @@
+{
+    "status": "ok",
+    "data": [
+        {
+            "uid": 6337,
+            "aqi": "-",
+            "time": {
+                "tz": "+02:00",
+                "stime": "2023-08-07 18:00:00",
+                "vtime": 1691424000
+            },
+            "station": {
+                "name": "Klundert, Brabant",
+                "geo": [
+                    51.6689355,
+                    4.541659
+                ],
+                "url": "netherland/brabant/klundert"
+            }
+        }
+    ]
+}

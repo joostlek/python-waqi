@@ -15,7 +15,7 @@ from .exceptions import (
     WAQIError,
     WAQIUnknownCityError,
 )
-from .models import WAQIAirQuality
+from .models import WAQIAirQuality, WAQISearchResult
 
 
 @dataclass
@@ -83,7 +83,7 @@ class WAQIClient:
             async with async_timeout.timeout(self.request_timeout):
                 response = await self.session.request(
                     METH_GET,
-                    url.with_query(data),
+                    str(url.with_query(data)).replace("search", "search/"),
                     headers=headers,
                 )
         except asyncio.TimeoutError as exception:
@@ -101,7 +101,10 @@ class WAQIClient:
             )
 
         response_data = cast(dict[str, Any], await response.json())
-        if response_data["status"] == "error" and response_data["data"] == "Invalid key":
+        if (
+            response_data["status"] == "error"
+            and response_data["data"] == "Invalid key"
+        ):
             raise WAQIAuthenticationError
         return response_data
 
@@ -112,6 +115,11 @@ class WAQIClient:
             msg = f"Could not find city {city}"
             raise WAQIUnknownCityError(msg)
         return WAQIAirQuality.parse_obj(response["data"])
+
+    async def search(self, keyword: str) -> list[WAQISearchResult]:
+        """Search for stations with a keyword."""
+        response = await self._request("search/", data={"keyword": keyword})
+        return [WAQISearchResult.parse_obj(station) for station in response["data"]]
 
     async def close(self) -> None:
         """Close open client session."""
