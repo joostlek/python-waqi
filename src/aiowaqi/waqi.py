@@ -7,6 +7,7 @@ from typing import Any, cast
 import async_timeout
 from aiohttp import ClientSession
 from aiohttp.hdrs import METH_GET
+from typing_extensions import Self
 from yarl import URL
 
 from .exceptions import (
@@ -154,7 +155,7 @@ class WAQIClient:
         if self.session and self._close_session:
             await self.session.close()
 
-    async def __aenter__(self) -> "WAQIClient":
+    async def __aenter__(self) -> Self:
         """Async enter.
 
         Returns
@@ -163,7 +164,7 @@ class WAQIClient:
         """
         return self
 
-    async def __aexit__(self, *_exc_info: Any) -> None:
+    async def __aexit__(self, *_exc_info: object) -> None:
         """Async exit.
 
         Args:
