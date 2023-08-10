@@ -1,13 +1,14 @@
 """Asynchronous Python client for the WAQI API."""
+from __future__ import annotations
+
 import asyncio
 from dataclasses import dataclass
 from importlib import metadata
-from typing import Any, cast
+from typing import TYPE_CHECKING, Any, cast
 
 import async_timeout
 from aiohttp import ClientSession
 from aiohttp.hdrs import METH_GET
-from typing_extensions import Self
 from yarl import URL
 
 from .exceptions import (
@@ -18,6 +19,9 @@ from .exceptions import (
     WAQIUnknownStationError,
 )
 from .models import WAQIAirQuality, WAQISearchResult
+
+if TYPE_CHECKING:
+    from typing_extensions import Self
 
 
 @dataclass
