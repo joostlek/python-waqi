@@ -78,6 +78,20 @@ class Location(BaseModel):
 class City(Location):
     """Represents a city object."""
 
+    location: str | None = Field(...)
+
+    @validator(
+        "location",
+        pre=True,
+        allow_reuse=True,
+    )
+    @classmethod
+    def parse_location(cls, value: str) -> str | None:
+        """Parse location to object."""
+        if not value:
+            return None
+        return value
+
 
 class Station(Location):
     """Represents a station object."""
