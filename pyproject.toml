@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aiowaqi"
-version = "0.2.1"
+version = "1.0.0"
 description = "Asynchronous Python client for WAQI API."
 authors = ["Joost Lekkerkerker <joostlek@outlook.com>"]
 maintainers = ["Joost Lekkerkerker <joostlek@outlook.com>"]
