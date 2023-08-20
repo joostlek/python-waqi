@@ -22,6 +22,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'location': None,
       'name': 'Klundert, Brabant',
     }),
     'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
@@ -63,6 +64,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'location': None,
       'name': 'Klundert, Brabant',
     }),
     'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
@@ -99,6 +101,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=52.20153, longitude=4.987444),
       'external_url': 'https://aqicn.org/city/netherland/breukelen/snelweg',
+      'location': None,
       'name': 'Snelweg, Breukelen',
     }),
     'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
@@ -135,6 +138,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=52.101308, longitude=5.128183),
       'external_url': 'https://aqicn.org/city/netherland/utrecht/griftpark',
+      'location': None,
       'name': 'Griftpark, Utrecht',
     }),
     'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
@@ -171,6 +175,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=52.105031, longitude=5.124464),
       'external_url': 'https://aqicn.org/city/netherland/utrecht/de-jongweg',
+      'location': None,
       'name': 'de Jongweg, Utrecht',
     }),
     'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
@@ -207,6 +212,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=52.3702157, longitude=4.8951679),
       'external_url': 'https://aqicn.org/city/amsterdam',
+      'location': None,
       'name': 'Amsterdam',
     }),
     'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
@@ -248,6 +254,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'location': None,
       'name': 'Klundert, Brabant',
     }),
     'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
@@ -289,6 +296,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'location': None,
       'name': 'Klundert, Brabant',
     }),
     'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
@@ -305,6 +313,43 @@
     }),
     'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
+  })
+# ---
+# name: test_get_by_station_number[372382]
+  dict({
+    'air_quality_index': 155,
+    'attributions': list([
+      dict({
+        'logo': None,
+        'name': 'Purple Air',
+        'url': 'https://www.purpleair.com/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': Coordinates(latitude=47.616673, longitude=-122.33384),
+      'external_url': 'https://aqicn.org/station/@372382',
+      'location': 'Terry Avenue, Belltown, Seattle, King County, Washington, 98101, USA',
+      'name': 'Building Cure',
+    }),
+    'dominant_pollutant': <Pollutant.PM25: 'pm25'>,
+    'extended_air_quality': dict({
+      'carbon_monoxide': None,
+      'humidity': 38.0,
+      'nitrogen_dioxide': None,
+      'ozone': None,
+      'pm10': 59.0,
+      'pm25': 155.0,
+      'pressure': None,
+      'sulfur_dioxide': None,
+      'temperature': 25.5,
+    }),
+    'measured_at': datetime.datetime(2023, 8, 20, 19, 20, 22, tzinfo=datetime.timezone.utc),
+    'station_id': -372382,
   })
 # ---
 # name: test_get_by_station_number[6337]
@@ -330,6 +375,7 @@
     'city': dict({
       'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'location': None,
       'name': 'Klundert, Brabant',
     }),
     'dominant_pollutant': <Pollutant.PM10: 'pm10'>,

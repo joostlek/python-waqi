@@ -1,0 +1,48 @@
+{
+    "status": "ok",
+    "data": {
+        "aqi": 155,
+        "idx": -372382,
+        "attributions": [
+            {
+                "url": "https://www.purpleair.com/",
+                "name": "Purple Air",
+                "station": "158009"
+            },
+            {
+                "url": "https://waqi.info/",
+                "name": "World Air Quality Index Project"
+            }
+        ],
+        "city": {
+            "geo": [
+                47.616673,
+                -122.33384
+            ],
+            "name": "Building Cure",
+            "url": "https://aqicn.org/station/@372382",
+            "location": "Terry Avenue, Belltown, Seattle, King County, Washington, 98101, USA"
+        },
+        "dominentpol": "pm25",
+        "iaqi": {
+            "h": {
+                "v": 38
+            },
+            "pm10": {
+                "v": 59
+            },
+            "pm25": {
+                "v": 155
+            },
+            "t": {
+                "v": 25.5
+            }
+        },
+        "time": {
+            "s": "2023-08-20 12:20:22",
+            "tz": "-07:00",
+            "v": 1692559222,
+            "iso": "2023-08-20T19:20:22Z"
+        }
+    }
+}
