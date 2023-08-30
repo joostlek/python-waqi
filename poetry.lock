@@ -1477,13 +1477,13 @@ testing-integration = ["build[virtualenv]", "filelock (>=3.4.0)", "jaraco.envs (
 
 [[package]]
 name = "syrupy"
-version = "4.3.0"
+version = "4.4.0"
 description = "Pytest Snapshot Test Utility"
 optional = false
 python-versions = ">=3.8.1,<4"
 files = [
-    {file = "syrupy-4.3.0-py3-none-any.whl", hash = "sha256:715ad7fab747aff385c5240a5d02fce50c89139d3dc76b725c0c3eb2ab0f9d29"},
-    {file = "syrupy-4.3.0.tar.gz", hash = "sha256:212cdf0dc9820d150669ebbd835345acaf311517385a1cb46dd01632acfdcc75"},
+    {file = "syrupy-4.4.0-py3-none-any.whl", hash = "sha256:ec86d37bf541841a39cbc26e84c60d666b9e6f6d8382ecf8068f7cfe6b2a30f8"},
+    {file = "syrupy-4.4.0.tar.gz", hash = "sha256:a7f2a388c7d60adcf4608c3657cb2bd16a77682b09ed2937bf8faf37eb3db39e"},
 ]
 
 [package.dependencies]
@@ -1740,4 +1740,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "94c7e753f4a3e70a7a403b6e471209f01a21607d523b32dfaba28a24db2a2c39"
+content-hash = "e43cb852394c1eac3184a6539479115f79a05b9fc332254322718ff0c1584bef"
