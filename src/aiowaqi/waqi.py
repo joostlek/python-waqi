@@ -120,7 +120,7 @@ class WAQIClient:
         if response["status"] == "error" and response["data"] == "Unknown station":
             msg = f"Could not find city {city}"
             raise WAQIUnknownCityError(msg)
-        return WAQIAirQuality.parse_obj(response["data"])
+        return WAQIAirQuality.from_dict(response["data"])
 
     async def get_by_name(self, name: str) -> WAQIAirQuality:
         """Get air quality measuring station by name."""
@@ -128,7 +128,7 @@ class WAQIClient:
         if response["status"] == "error" and response["data"] == "Unknown station":
             msg = f"Could not find station {name}"
             raise WAQIUnknownStationError(msg)
-        return WAQIAirQuality.parse_obj(response["data"])
+        return WAQIAirQuality.from_dict(response["data"])
 
     async def get_by_station_number(self, station_number: int) -> WAQIAirQuality:
         """Get air quality measuring station by station number."""
@@ -141,7 +141,7 @@ class WAQIClient:
     ) -> WAQIAirQuality:
         """Get nearest air quality measuring station by coordinates."""
         response = await self._request(f"feed/geo:{latitude};{longitude}")
-        return WAQIAirQuality.parse_obj(response["data"])
+        return WAQIAirQuality.from_dict(response["data"])
 
     async def get_by_ip(
         self,
@@ -152,7 +152,7 @@ class WAQIClient:
     async def search(self, keyword: str) -> list[WAQISearchResult]:
         """Search for stations with a keyword."""
         response = await self._request("search/", data={"keyword": keyword})
-        return [WAQISearchResult.parse_obj(station) for station in response["data"]]
+        return [WAQISearchResult.from_dict(station) for station in response["data"]]
 
     async def close(self) -> None:
         """Close open client session."""

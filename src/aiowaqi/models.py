@@ -5,21 +5,15 @@ from contextlib import suppress
 from dataclasses import dataclass
 from datetime import datetime
 from enum import StrEnum
-from typing import Any
+from typing import Any, Self
 
-try:
-    from pydantic.v1 import BaseModel, Field, validator
-except ImportError:  # pragma: no cover
-    from pydantic import (  # type: ignore[assignment] # pragma: no cover
-        BaseModel,
-        Field,
-        validator,
-    )
+from aiowaqi.util import to_enum
 
 
 class Pollutant(StrEnum):
     """Enum of pollutants."""
 
+    UNKNOWN = "unknown"
     CARBON_MONOXIDE = "co"
     NITROGEN_DIOXIDE = "no2"
     OZONE = "o3"
@@ -28,25 +22,25 @@ class Pollutant(StrEnum):
     PM25 = "pm25"
 
 
-class Attribution(BaseModel):
+@dataclass(slots=True)
+class Attribution:
     """Represents an attribution."""
 
-    url: str = Field(...)
-    name: str = Field(...)
-    logo: str | None = Field(None)
+    url: str
+    name: str
+    logo: str | None
 
-    @validator(
-        "name",
-        pre=True,
-        allow_reuse=True,
-    )
     @classmethod
-    def strip_name(cls, value: str) -> str:
-        """Strip name off attribution name."""
-        return value.strip()
+    def from_dict(cls, attribution: dict[str, Any]) -> Self:
+        """Initialize from a dict."""
+        return cls(
+            url=attribution["url"],
+            name=attribution["name"].strip(),
+            logo=attribution.get("logo"),
+        )
 
 
-@dataclass
+@dataclass(slots=True)
 class Coordinates:
     """Represents coordinates."""
 
@@ -54,134 +48,139 @@ class Coordinates:
     longitude: float
 
 
-class Location(BaseModel):
+@dataclass(slots=True)
+class Location:
     """Represents a location object."""
 
-    external_url: str = Field(..., alias="url")
-    name: str = Field(...)
-    coordinates: Coordinates = Field(..., alias="geo")
+    external_url: str
+    name: str
+    coordinates: Coordinates
 
-    @validator(
-        "coordinates",
-        pre=True,
-        allow_reuse=True,
-    )
     @classmethod
-    def parse_coordinates(cls, value: list[float]) -> Coordinates:
-        """Parse coordinates to object."""
-        return Coordinates(
-            latitude=value[0],
-            longitude=value[1],
+    def from_dict(cls, location: dict[str, Any]) -> Self:
+        """Initialize from a dict."""
+        return cls(
+            external_url=location["url"],
+            name=location["name"],
+            coordinates=Coordinates(
+                latitude=location["geo"][0],
+                longitude=location["geo"][1],
+            ),
         )
 
 
+@dataclass(slots=True)
 class City(Location):
     """Represents a city object."""
 
-    location: str | None = Field(...)
+    location: str | None
 
-    @validator(
-        "location",
-        pre=True,
-        allow_reuse=True,
-    )
     @classmethod
-    def parse_location(cls, value: str) -> str | None:
-        """Parse location to object."""
-        if not value:
-            return None
-        return value
+    def from_dict(cls, location: dict[str, Any]) -> Self:
+        """Initialize from a dict."""
+        loc = location["location"]
+        if not loc:
+            loc = None
+        return cls(
+            external_url=location["url"],
+            name=location["name"],
+            coordinates=Coordinates(
+                latitude=location["geo"][0],
+                longitude=location["geo"][1],
+            ),
+            location=loc,
+        )
 
 
+@dataclass(slots=True)
 class Station(Location):
     """Represents a station object."""
 
 
-class WAQIExtendedAirQuality(BaseModel):
+@dataclass(slots=True)
+class WAQIExtendedAirQuality:
     """Represents extended air quality data."""
 
-    carbon_monoxide: float | None = Field(None, alias="co")
-    humidity: float | None = Field(None, alias="h")
-    nitrogen_dioxide: float | None = Field(None, alias="no2")
-    ozone: float | None = Field(None, alias="o3")
-    pressure: float | None = Field(None, alias="p")
-    sulfur_dioxide: float | None = Field(None, alias="so2")
-    pm10: float | None = Field(None)
-    pm25: float | None = Field(None)
-    temperature: float | None = Field(None, alias="t")
+    carbon_monoxide: float | None
+    humidity: float | None
+    nitrogen_dioxide: float | None
+    ozone: float | None
+    pressure: float | None
+    sulfur_dioxide: float | None
+    pm10: float | None
+    pm25: float | None
+    temperature: float | None
 
-    @validator(
-        "carbon_monoxide",
-        "humidity",
-        "nitrogen_dioxide",
-        "ozone",
-        "pressure",
-        "sulfur_dioxide",
-        "pm10",
-        "pm25",
-        "temperature",
-        pre=True,
-        allow_reuse=True,
-    )
     @classmethod
-    def get_value(cls, value: dict[str, float]) -> float:
-        """Get extra air quality value."""
-        return value["v"]
+    def from_dict(cls, air_quality: dict[str, Any]) -> Self:
+        """Initialize from a dict."""
+        return cls(
+            carbon_monoxide=air_quality.get("co", {}).get("v"),
+            humidity=air_quality.get("h", {}).get("v"),
+            nitrogen_dioxide=air_quality.get("no2", {}).get("v"),
+            ozone=air_quality.get("o3", {}).get("v"),
+            pressure=air_quality.get("p", {}).get("v"),
+            sulfur_dioxide=air_quality.get("so2", {}).get("v"),
+            pm10=air_quality.get("pm10", {}).get("v"),
+            pm25=air_quality.get("pm25", {}).get("v"),
+            temperature=air_quality.get("t", {}).get("v"),
+        )
 
 
-class WAQIAirQuality(BaseModel):
+@dataclass(slots=True)
+class WAQIAirQuality:
     """Represents the air quality data from WAQI."""
 
-    air_quality_index: int | None = Field(None, alias="aqi")
-    station_id: int = Field(..., alias="idx")
-    attributions: list[Attribution] = Field([])
-    city: City = Field(...)
-    extended_air_quality: WAQIExtendedAirQuality = Field(..., alias="iaqi")
-    dominant_pollutant: Pollutant = Field(..., alias="dominentpol")
-    measured_at: datetime = Field(..., alias="time")
+    air_quality_index: int | None
+    station_id: int
+    attributions: list[Attribution]
+    city: City
+    extended_air_quality: WAQIExtendedAirQuality
+    dominant_pollutant: Pollutant
+    measured_at: datetime
 
-    @validator(
-        "air_quality_index",
-        pre=True,
-        allow_reuse=True,
-    )
     @classmethod
-    def get_value(cls, value: int | str) -> int | None:
-        """Handle invalid string."""
+    def from_dict(cls, air_quality: dict[str, Any]) -> Self:
+        """Initialize from a dict."""
+        aqi = None
         with suppress(ValueError):
-            return int(value)
-        return None
+            aqi = int(air_quality["aqi"])
 
-    @validator(
-        "measured_at",
-        pre=True,
-        allow_reuse=True,
-    )
-    @classmethod
-    def get_datetime(cls, value: dict[str, Any]) -> datetime:
-        """Get measuring date."""
-        return datetime.fromisoformat(value["iso"])
+        return cls(
+            air_quality_index=aqi,
+            station_id=air_quality["idx"],
+            attributions=[
+                Attribution.from_dict(attribution)
+                for attribution in air_quality["attributions"]
+            ],
+            city=City.from_dict(air_quality["city"]),
+            extended_air_quality=WAQIExtendedAirQuality.from_dict(air_quality["iaqi"]),
+            dominant_pollutant=to_enum(
+                Pollutant,
+                air_quality["dominentpol"],
+                Pollutant.UNKNOWN,
+            ),
+            measured_at=datetime.fromisoformat(air_quality["time"]["iso"]),
+        )
 
 
-class WAQISearchResult(BaseModel):
+@dataclass(slots=True)
+class WAQISearchResult:
     """Represents a search result from the WAQI api."""
 
-    air_quality_index: int | None = Field(None, alias="aqi")
-    station_id: int = Field(..., alias="uid")
-    station: Station = Field(...)
+    air_quality_index: int | None
+    station_id: int
+    station: Station
 
-    @validator(
-        "air_quality_index",
-        pre=True,
-        allow_reuse=True,
-    )
     @classmethod
-    def get_value(cls, value: int | str) -> int | None:
-        """Handle invalid string."""
+    def from_dict(cls, result: dict[str, Any]) -> Self:
+        """Initialize from a dict."""
+        aqi = None
         with suppress(ValueError):
-            return int(value)
-        return None
+            aqi = int(result["aqi"])
 
-
-City.update_forward_refs()
-WAQIExtendedAirQuality.update_forward_refs()
+        return cls(
+            air_quality_index=aqi,
+            station_id=result["uid"],
+            station=Station.from_dict(result["station"]),
+        )
