@@ -4,7 +4,7 @@ from __future__ import annotations
 from contextlib import suppress
 from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 try:
@@ -17,7 +17,7 @@ except ImportError:  # pragma: no cover
     )
 
 
-class Pollutant(str, Enum):
+class Pollutant(StrEnum):
     """Enum of pollutants."""
 
     CARBON_MONOXIDE = "co"
