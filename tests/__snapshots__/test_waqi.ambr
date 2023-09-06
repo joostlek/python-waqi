@@ -20,7 +20,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'coordinates': dict({
+        'latitude': 51.6689355,
+        'longitude': 4.541659,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'location': None,
       'name': 'Klundert, Brabant',
@@ -31,9 +34,9 @@
       'humidity': 71.6,
       'nitrogen_dioxide': 1.6,
       'ozone': None,
-      'pm10': 4.0,
+      'pm10': 4,
       'pm25': None,
-      'pressure': 1018.0,
+      'pressure': 1018,
       'sulfur_dioxide': None,
       'temperature': 18.1,
     }),
@@ -62,7 +65,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'coordinates': dict({
+        'latitude': 51.6689355,
+        'longitude': 4.541659,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'location': None,
       'name': 'Klundert, Brabant',
@@ -73,9 +79,9 @@
       'humidity': 71.6,
       'nitrogen_dioxide': 1.6,
       'ozone': None,
-      'pm10': 4.0,
+      'pm10': 4,
       'pm25': None,
-      'pressure': 1018.0,
+      'pressure': 1018,
       'sulfur_dioxide': None,
       'temperature': 18.1,
     }),
@@ -99,7 +105,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=52.20153, longitude=4.987444),
+      'coordinates': dict({
+        'latitude': 52.20153,
+        'longitude': 4.987444,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/breukelen/snelweg',
       'location': None,
       'name': 'Snelweg, Breukelen',
@@ -110,8 +119,8 @@
       'humidity': 77.5,
       'nitrogen_dioxide': 3.9,
       'ozone': 29.2,
-      'pm10': 12.0,
-      'pm25': 7.0,
+      'pm10': 12,
+      'pm25': 7,
       'pressure': 1008.4,
       'sulfur_dioxide': None,
       'temperature': 16.9,
@@ -136,7 +145,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=52.101308, longitude=5.128183),
+      'coordinates': dict({
+        'latitude': 52.101308,
+        'longitude': 5.128183,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/utrecht/griftpark',
       'location': None,
       'name': 'Griftpark, Utrecht',
@@ -147,8 +159,8 @@
       'humidity': 73.2,
       'nitrogen_dioxide': 0.7,
       'ozone': 29.4,
-      'pm10': 12.0,
-      'pm25': 1.0,
+      'pm10': 12,
+      'pm25': 1,
       'pressure': 1008.8,
       'sulfur_dioxide': 0.1,
       'temperature': 17.5,
@@ -173,7 +185,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=52.105031, longitude=5.124464),
+      'coordinates': dict({
+        'latitude': 52.105031,
+        'longitude': 5.124464,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/utrecht/de-jongweg',
       'location': None,
       'name': 'de Jongweg, Utrecht',
@@ -181,14 +196,14 @@
     'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
-      'humidity': 80.0,
+      'humidity': 80,
       'nitrogen_dioxide': 2.3,
       'ozone': 29.4,
-      'pm10': 12.0,
-      'pm25': 17.0,
+      'pm10': 12,
+      'pm25': 17,
       'pressure': 1008.8,
       'sulfur_dioxide': None,
-      'temperature': 16.0,
+      'temperature': 16,
     }),
     'measured_at': datetime.datetime(2023, 8, 7, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 4584,
@@ -210,7 +225,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=52.3702157, longitude=4.8951679),
+      'coordinates': dict({
+        'latitude': 52.3702157,
+        'longitude': 4.8951679,
+      }),
       'external_url': 'https://aqicn.org/city/amsterdam',
       'location': None,
       'name': 'Amsterdam',
@@ -221,8 +239,8 @@
       'humidity': 69.5,
       'nitrogen_dioxide': 0.7,
       'ozone': 26.4,
-      'pm10': 9.0,
-      'pm25': 15.0,
+      'pm10': 9,
+      'pm25': 15,
       'pressure': 1016.4,
       'sulfur_dioxide': 0.2,
       'temperature': 17.5,
@@ -252,7 +270,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'coordinates': dict({
+        'latitude': 51.6689355,
+        'longitude': 4.541659,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'location': None,
       'name': 'Klundert, Brabant',
@@ -261,11 +282,11 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
-      'nitrogen_dioxide': 2.0,
+      'nitrogen_dioxide': 2,
       'ozone': None,
-      'pm10': 5.0,
+      'pm10': 5,
       'pm25': None,
-      'pressure': 1018.0,
+      'pressure': 1018,
       'sulfur_dioxide': None,
       'temperature': 18.1,
     }),
@@ -294,7 +315,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'coordinates': dict({
+        'latitude': 51.6689355,
+        'longitude': 4.541659,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'location': None,
       'name': 'Klundert, Brabant',
@@ -303,11 +327,11 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
-      'nitrogen_dioxide': 2.0,
+      'nitrogen_dioxide': 2,
       'ozone': None,
-      'pm10': 5.0,
+      'pm10': 5,
       'pm25': None,
-      'pressure': 1018.0,
+      'pressure': 1018,
       'sulfur_dioxide': None,
       'temperature': 18.1,
     }),
@@ -331,7 +355,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=47.616673, longitude=-122.33384),
+      'coordinates': dict({
+        'latitude': 47.616673,
+        'longitude': -122.33384,
+      }),
       'external_url': 'https://aqicn.org/station/@372382',
       'location': 'Terry Avenue, Belltown, Seattle, King County, Washington, 98101, USA',
       'name': 'Building Cure',
@@ -339,11 +366,11 @@
     'dominant_pollutant': <Pollutant.PM25: 'pm25'>,
     'extended_air_quality': dict({
       'carbon_monoxide': None,
-      'humidity': 38.0,
+      'humidity': 38,
       'nitrogen_dioxide': None,
       'ozone': None,
-      'pm10': 59.0,
-      'pm25': 155.0,
+      'pm10': 59,
+      'pm25': 155,
       'pressure': None,
       'sulfur_dioxide': None,
       'temperature': 25.5,
@@ -373,7 +400,10 @@
       }),
     ]),
     'city': dict({
-      'coordinates': Coordinates(latitude=51.6689355, longitude=4.541659),
+      'coordinates': dict({
+        'latitude': 51.6689355,
+        'longitude': 4.541659,
+      }),
       'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
       'location': None,
       'name': 'Klundert, Brabant',
@@ -382,11 +412,11 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
-      'nitrogen_dioxide': 2.0,
+      'nitrogen_dioxide': 2,
       'ozone': None,
-      'pm10': 5.0,
+      'pm10': 5,
       'pm25': None,
-      'pressure': 1018.0,
+      'pressure': 1018,
       'sulfur_dioxide': None,
       'temperature': 18.1,
     }),
@@ -396,12 +426,34 @@
 # ---
 # name: test_search[failing_klundert]
   list([
-    WAQISearchResult(air_quality_index=None, station_id=6337, station=Station(external_url='netherland/brabant/klundert', name='Klundert, Brabant', coordinates=Coordinates(latitude=51.6689355, longitude=4.541659))),
+    dict({
+      'air_quality_index': None,
+      'station': dict({
+        'coordinates': dict({
+          'latitude': 51.6689355,
+          'longitude': 4.541659,
+        }),
+        'external_url': 'netherland/brabant/klundert',
+        'name': 'Klundert, Brabant',
+      }),
+      'station_id': 6337,
+    }),
   ])
 # ---
 # name: test_search[klundert]
   list([
-    WAQISearchResult(air_quality_index=4, station_id=6337, station=Station(external_url='netherland/brabant/klundert', name='Klundert, Brabant', coordinates=Coordinates(latitude=51.6689355, longitude=4.541659))),
+    dict({
+      'air_quality_index': 4,
+      'station': dict({
+        'coordinates': dict({
+          'latitude': 51.6689355,
+          'longitude': 4.541659,
+        }),
+        'external_url': 'netherland/brabant/klundert',
+        'name': 'Klundert, Brabant',
+      }),
+      'station_id': 6337,
+    }),
   ])
 # ---
 # name: test_search[unknown]
