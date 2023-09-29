@@ -122,17 +122,21 @@ class WAQIClient:
             raise WAQIUnknownCityError(msg)
         return WAQIAirQuality.from_dict(response["data"])
 
-    async def get_by_name(self, name: str) -> WAQIAirQuality:
-        """Get air quality measuring station by name."""
-        response = await self._request(f"feed/{name}")
+    async def get_by_identifier(self, identifier: str) -> WAQIAirQuality:
+        """Get air quality measuring station by identifier."""
+        response = await self._request(f"feed/{identifier}")
         if response["status"] == "error" and response["data"] == "Unknown station":
-            msg = f"Could not find station {name}"
+            msg = f"Could not find station {identifier}"
             raise WAQIUnknownStationError(msg)
-        return WAQIAirQuality.from_dict(response["data"])
-
-    async def get_by_station_number(self, station_number: int) -> WAQIAirQuality:
-        """Get air quality measuring station by station number."""
-        return await self.get_by_name(f"@{station_number}")
+        data = response["data"]
+        if (
+            "status" in data
+            and data["status"] == "error"
+            and data["msg"] == "Unknown ID"
+        ):
+            msg = f"Could not find station {identifier}"
+            raise WAQIUnknownStationError(msg)
+        return WAQIAirQuality.from_dict(data)
 
     async def get_by_coordinates(
         self,
@@ -147,7 +151,7 @@ class WAQIClient:
         self,
     ) -> WAQIAirQuality:
         """Get the nearest air quality measuring station according to WAQI."""
-        return await self.get_by_name("here")
+        return await self.get_by_identifier("here")
 
     async def search(self, keyword: str) -> list[WAQISearchResult]:
         """Search for stations with a keyword."""

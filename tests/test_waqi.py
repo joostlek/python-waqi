@@ -223,103 +223,64 @@ async def test_search(
 
 
 @pytest.mark.parametrize(
-    "name",
+    "identifier",
     [
+        "@6337",
+        "@372382",
+        "A123946",
         "klundert",
         "failing_klundert",
     ],
 )
-async def test_get_by_name(
+async def test_get_by_identifier(
     aresponses: ResponsesMockServer,
-    name: str,
+    identifier: str,
     snapshot: SnapshotAssertion,
 ) -> None:
-    """Test getting stations by name."""
+    """Test getting stations by identifier."""
     aresponses.add(
         WAQI_URL,
-        f"/feed/{name}?token=test",
+        f"/feed/{identifier}?token=test",
         "GET",
         aresponses.Response(
             status=200,
             headers={"Content-Type": "application/json"},
-            text=load_fixture(f"name_feed_{name}.json"),
+            text=load_fixture(f"identifier_{identifier}.json"),
         ),
         match_querystring=True,
     )
     async with WAQIClient() as waqi:
         waqi.authenticate("test")
-        response = await waqi.get_by_name(name)
+        response = await waqi.get_by_identifier(identifier)
         assert asdict(response) == snapshot
-
-
-async def test_get_unknown_by_name(
-    aresponses: ResponsesMockServer,
-) -> None:
-    """Test getting unknown station by name."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/unknown",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("name_feed_unknown.json"),
-        ),
-    )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        with pytest.raises(WAQIUnknownStationError):
-            await waqi.get_by_name("unknown")
 
 
 @pytest.mark.parametrize(
-    "station_number",
+    "identifier",
     [
-        6337,
-        372382,
+        "unknown",
+        "@123946",
     ],
 )
-async def test_get_by_station_number(
+async def test_get_unknown_station_by_identifier(
     aresponses: ResponsesMockServer,
-    station_number: int,
-    snapshot: SnapshotAssertion,
+    identifier: str,
 ) -> None:
-    """Test getting stations by station_number."""
+    """Test getting unknown station by identifier."""
     aresponses.add(
         WAQI_URL,
-        f"/feed/@{station_number}?token=test",
+        f"/feed/{identifier}",
         "GET",
         aresponses.Response(
             status=200,
             headers={"Content-Type": "application/json"},
-            text=load_fixture(f"station_number_feed_{station_number}.json"),
-        ),
-        match_querystring=True,
-    )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        response = await waqi.get_by_station_number(station_number)
-        assert asdict(response) == snapshot
-
-
-async def test_get_unknown_by_station_number(
-    aresponses: ResponsesMockServer,
-) -> None:
-    """Test getting unknown station by station_number."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/@0",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("station_number_feed_unknown.json"),
+            text=load_fixture(f"identifier_{identifier}.json"),
         ),
     )
     async with WAQIClient() as waqi:
         waqi.authenticate("test")
         with pytest.raises(WAQIUnknownStationError):
-            await waqi.get_by_station_number(0)
+            await waqi.get_by_identifier(identifier)
 
 
 async def test_get_by_coordinates(

@@ -1,0 +1,48 @@
+{
+    "status": "ok",
+    "data": {
+        "aqi": 10,
+        "idx": -123946,
+        "attributions": [
+            {
+                "url": "https://www.purpleair.com/",
+                "name": "Purple Air",
+                "station": "56181"
+            },
+            {
+                "url": "https://waqi.info/",
+                "name": "World Air Quality Index Project"
+            }
+        ],
+        "city": {
+            "geo": [
+                51.53477,
+                4.441647
+            ],
+            "name": "Meteoroosendaalwest",
+            "url": "https://aqicn.org/station/@123946",
+            "location": "Anthonie van Dijckstraat, Stadsoevers, Roosendaal, North Brabant, Netherlands, 4703NA, The Netherlands"
+        },
+        "dominentpol": "pm25",
+        "iaqi": {
+            "h": {
+                "v": 55
+            },
+            "pm10": {
+                "v": 3
+            },
+            "pm25": {
+                "v": 10
+            },
+            "t": {
+                "v": 22.7
+            }
+        },
+        "time": {
+            "s": "2023-09-29 16:44:13",
+            "tz": "+02:00",
+            "v": 1695998653,
+            "iso": "2023-09-29T14:44:13Z"
+        }
+    }
+}

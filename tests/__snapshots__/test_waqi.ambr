@@ -209,14 +209,14 @@
     'station_id': 4584,
   })
 # ---
-# name: test_get_by_ip
+# name: test_get_by_identifier[@372382]
   dict({
-    'air_quality_index': 26,
+    'air_quality_index': 155,
     'attributions': list([
       dict({
-        'logo': 'Netherland-RIVM.png',
-        'name': 'RIVM - Rijksinstituut voor Volksgezondheid en Milieum, Landelijk Meetnet Luchtkwaliteit',
-        'url': 'http://www.luchtmeetnet.nl/',
+        'logo': None,
+        'name': 'Purple Air',
+        'url': 'https://www.purpleair.com/',
       }),
       dict({
         'logo': None,
@@ -226,30 +226,115 @@
     ]),
     'city': dict({
       'coordinates': dict({
-        'latitude': 52.3702157,
-        'longitude': 4.8951679,
+        'latitude': 47.616673,
+        'longitude': -122.33384,
       }),
-      'external_url': 'https://aqicn.org/city/amsterdam',
-      'location': None,
-      'name': 'Amsterdam',
+      'external_url': 'https://aqicn.org/station/@372382',
+      'location': 'Terry Avenue, Belltown, Seattle, King County, Washington, 98101, USA',
+      'name': 'Building Cure',
     }),
-    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
+    'dominant_pollutant': <Pollutant.PM25: 'pm25'>,
     'extended_air_quality': dict({
-      'carbon_monoxide': 2.3,
-      'humidity': 69.5,
-      'nitrogen_dioxide': 0.7,
-      'ozone': 26.4,
-      'pm10': 9,
-      'pm25': 15,
-      'pressure': 1016.4,
-      'sulfur_dioxide': 0.2,
-      'temperature': 17.5,
+      'carbon_monoxide': None,
+      'humidity': 38,
+      'nitrogen_dioxide': None,
+      'ozone': None,
+      'pm10': 59,
+      'pm25': 155,
+      'pressure': None,
+      'sulfur_dioxide': None,
+      'temperature': 25.5,
     }),
-    'measured_at': datetime.datetime(2023, 8, 7, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
-    'station_id': 5771,
+    'measured_at': datetime.datetime(2023, 8, 20, 19, 20, 22, tzinfo=datetime.timezone.utc),
+    'station_id': -372382,
   })
 # ---
-# name: test_get_by_name[failing_klundert]
+# name: test_get_by_identifier[@6337]
+  dict({
+    'air_quality_index': 5,
+    'attributions': list([
+      dict({
+        'logo': 'Netherland-RIVM.png',
+        'name': 'RIVM - Rijksinstituut voor Volksgezondheid en Milieum, Landelijk Meetnet Luchtkwaliteit',
+        'url': 'http://www.luchtmeetnet.nl/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'Provincie Noord Brabant',
+        'url': 'http://www.brabantluchtmeet.net/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': dict({
+        'latitude': 51.6689355,
+        'longitude': 4.541659,
+      }),
+      'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'location': None,
+      'name': 'Klundert, Brabant',
+    }),
+    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
+    'extended_air_quality': dict({
+      'carbon_monoxide': None,
+      'humidity': 71.6,
+      'nitrogen_dioxide': 2,
+      'ozone': None,
+      'pm10': 5,
+      'pm25': None,
+      'pressure': 1018,
+      'sulfur_dioxide': None,
+      'temperature': 18.1,
+    }),
+    'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
+    'station_id': 6337,
+  })
+# ---
+# name: test_get_by_identifier[A123946]
+  dict({
+    'air_quality_index': 10,
+    'attributions': list([
+      dict({
+        'logo': None,
+        'name': 'Purple Air',
+        'url': 'https://www.purpleair.com/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': dict({
+        'latitude': 51.53477,
+        'longitude': 4.441647,
+      }),
+      'external_url': 'https://aqicn.org/station/@123946',
+      'location': 'Anthonie van Dijckstraat, Stadsoevers, Roosendaal, North Brabant, Netherlands, 4703NA, The Netherlands',
+      'name': 'Meteoroosendaalwest',
+    }),
+    'dominant_pollutant': <Pollutant.PM25: 'pm25'>,
+    'extended_air_quality': dict({
+      'carbon_monoxide': None,
+      'humidity': 55,
+      'nitrogen_dioxide': None,
+      'ozone': None,
+      'pm10': 3,
+      'pm25': 10,
+      'pressure': None,
+      'sulfur_dioxide': None,
+      'temperature': 22.7,
+    }),
+    'measured_at': datetime.datetime(2023, 9, 29, 14, 44, 13, tzinfo=datetime.timezone.utc),
+    'station_id': -123946,
+  })
+# ---
+# name: test_get_by_identifier[failing_klundert]
   dict({
     'air_quality_index': None,
     'attributions': list([
@@ -294,7 +379,7 @@
     'station_id': 6337,
   })
 # ---
-# name: test_get_by_name[klundert]
+# name: test_get_by_identifier[klundert]
   dict({
     'air_quality_index': 5,
     'attributions': list([
@@ -339,49 +424,9 @@
     'station_id': 6337,
   })
 # ---
-# name: test_get_by_station_number[372382]
+# name: test_get_by_ip
   dict({
-    'air_quality_index': 155,
-    'attributions': list([
-      dict({
-        'logo': None,
-        'name': 'Purple Air',
-        'url': 'https://www.purpleair.com/',
-      }),
-      dict({
-        'logo': None,
-        'name': 'World Air Quality Index Project',
-        'url': 'https://waqi.info/',
-      }),
-    ]),
-    'city': dict({
-      'coordinates': dict({
-        'latitude': 47.616673,
-        'longitude': -122.33384,
-      }),
-      'external_url': 'https://aqicn.org/station/@372382',
-      'location': 'Terry Avenue, Belltown, Seattle, King County, Washington, 98101, USA',
-      'name': 'Building Cure',
-    }),
-    'dominant_pollutant': <Pollutant.PM25: 'pm25'>,
-    'extended_air_quality': dict({
-      'carbon_monoxide': None,
-      'humidity': 38,
-      'nitrogen_dioxide': None,
-      'ozone': None,
-      'pm10': 59,
-      'pm25': 155,
-      'pressure': None,
-      'sulfur_dioxide': None,
-      'temperature': 25.5,
-    }),
-    'measured_at': datetime.datetime(2023, 8, 20, 19, 20, 22, tzinfo=datetime.timezone.utc),
-    'station_id': -372382,
-  })
-# ---
-# name: test_get_by_station_number[6337]
-  dict({
-    'air_quality_index': 5,
+    'air_quality_index': 26,
     'attributions': list([
       dict({
         'logo': 'Netherland-RIVM.png',
@@ -390,38 +435,33 @@
       }),
       dict({
         'logo': None,
-        'name': 'Provincie Noord Brabant',
-        'url': 'http://www.brabantluchtmeet.net/',
-      }),
-      dict({
-        'logo': None,
         'name': 'World Air Quality Index Project',
         'url': 'https://waqi.info/',
       }),
     ]),
     'city': dict({
       'coordinates': dict({
-        'latitude': 51.6689355,
-        'longitude': 4.541659,
+        'latitude': 52.3702157,
+        'longitude': 4.8951679,
       }),
-      'external_url': 'https://aqicn.org/city/netherland/brabant/klundert',
+      'external_url': 'https://aqicn.org/city/amsterdam',
       'location': None,
-      'name': 'Klundert, Brabant',
+      'name': 'Amsterdam',
     }),
-    'dominant_pollutant': <Pollutant.PM10: 'pm10'>,
+    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
     'extended_air_quality': dict({
-      'carbon_monoxide': None,
-      'humidity': 71.6,
-      'nitrogen_dioxide': 2,
-      'ozone': None,
-      'pm10': 5,
-      'pm25': None,
-      'pressure': 1018,
-      'sulfur_dioxide': None,
-      'temperature': 18.1,
+      'carbon_monoxide': 2.3,
+      'humidity': 69.5,
+      'nitrogen_dioxide': 0.7,
+      'ozone': 26.4,
+      'pm10': 9,
+      'pm25': 15,
+      'pressure': 1016.4,
+      'sulfur_dioxide': 0.2,
+      'temperature': 17.5,
     }),
-    'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
-    'station_id': 6337,
+    'measured_at': datetime.datetime(2023, 8, 7, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
+    'station_id': 5771,
   })
 # ---
 # name: test_search[failing_klundert]
