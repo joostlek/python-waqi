@@ -125,10 +125,18 @@ class WAQIClient:
     async def get_by_name(self, name: str) -> WAQIAirQuality:
         """Get air quality measuring station by name."""
         response = await self._request(f"feed/{name}")
-        if response["status"] == "error" and response["data"] == "Unknown station":
+        data = response["data"]
+        if (
+            response["status"] == "error"
+            and data in ("Unknown station", "no such station")
+        ) or (
+            "status" in data
+            and data["status"] == "error"
+            and data["msg"] == "Unknown ID"
+        ):
             msg = f"Could not find station {name}"
             raise WAQIUnknownStationError(msg)
-        return WAQIAirQuality.from_dict(response["data"])
+        return WAQIAirQuality.from_dict(data)
 
     async def get_by_station_number(self, station_number: int) -> WAQIAirQuality:
         """Get air quality measuring station by station number."""
