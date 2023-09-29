@@ -302,8 +302,17 @@ async def test_get_by_station_number(
         assert asdict(response) == snapshot
 
 
+@pytest.mark.parametrize(
+    "identifier",
+    [
+        "unknown",
+        "@123946",
+        "A10142",
+    ],
+)
 async def test_get_unknown_by_station_number(
     aresponses: ResponsesMockServer,
+    identifier: str,
 ) -> None:
     """Test getting unknown station by station_number."""
     aresponses.add(
@@ -313,7 +322,7 @@ async def test_get_unknown_by_station_number(
         aresponses.Response(
             status=200,
             headers={"Content-Type": "application/json"},
-            text=load_fixture("station_number_feed_unknown.json"),
+            text=load_fixture(f"station_number_feed_{identifier}.json"),
         ),
     )
     async with WAQIClient() as waqi:
