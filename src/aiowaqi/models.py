@@ -7,13 +7,12 @@ from datetime import datetime
 from enum import StrEnum
 from typing import Any, Self
 
-from aiowaqi.util import to_enum
+from aiowaqi.util import to_nullable_enum
 
 
 class Pollutant(StrEnum):
     """Enum of pollutants."""
 
-    UNKNOWN = "unknown"
     CARBON_MONOXIDE = "co"
     NITROGEN_DIOXIDE = "no2"
     OZONE = "o3"
@@ -136,7 +135,7 @@ class WAQIAirQuality:
     attributions: list[Attribution]
     city: City
     extended_air_quality: WAQIExtendedAirQuality
-    dominant_pollutant: Pollutant
+    dominant_pollutant: Pollutant | None
     measured_at: datetime
 
     @classmethod
@@ -145,6 +144,12 @@ class WAQIAirQuality:
         aqi = None
         with suppress(ValueError):
             aqi = int(air_quality["aqi"])
+
+        dominant_pollutant = air_quality["dominentpol"]
+        if dominant_pollutant == "":
+            dominant_pollutant = None
+        else:
+            dominant_pollutant = to_nullable_enum(Pollutant, air_quality["dominentpol"])
 
         return cls(
             air_quality_index=aqi,
@@ -155,11 +160,7 @@ class WAQIAirQuality:
             ],
             city=City.from_dict(air_quality["city"]),
             extended_air_quality=WAQIExtendedAirQuality.from_dict(air_quality["iaqi"]),
-            dominant_pollutant=to_enum(
-                Pollutant,
-                air_quality["dominentpol"],
-                Pollutant.UNKNOWN,
-            ),
+            dominant_pollutant=dominant_pollutant,
             measured_at=datetime.fromisoformat(air_quality["time"]["iso"]),
         )
 

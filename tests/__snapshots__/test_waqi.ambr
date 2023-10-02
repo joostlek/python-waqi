@@ -129,6 +129,51 @@
     'station_id': 4586,
   })
 # ---
+# name: test_by_city[olivias]
+  dict({
+    'air_quality_index': 8,
+    'attributions': list([
+      dict({
+        'logo': 'portugal-qualar.png',
+        'name': 'Portugal -Agencia Portuguesa do Ambiente - Qualidade do Ar',
+        'url': 'http://qualar.apambiente.pt/',
+      }),
+      dict({
+        'logo': 'Europe-EEA.png',
+        'name': 'European Environment Agency',
+        'url': 'http://www.eea.europa.eu/themes/air/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': dict({
+        'latitude': 38.768888888889,
+        'longitude': -9.1080555555556,
+      }),
+      'external_url': 'https://aqicn.org/city/portugal/lisboa/olivais',
+      'location': None,
+      'name': 'Olivais, Lisboa, Portugal',
+    }),
+    'dominant_pollutant': <Pollutant.OZONE: 'o3'>,
+    'extended_air_quality': dict({
+      'carbon_monoxide': None,
+      'humidity': 78,
+      'nitrogen_dioxide': 29.7,
+      'ozone': 7.8,
+      'pm10': 27,
+      'pm25': 51,
+      'pressure': 1021,
+      'sulfur_dioxide': 2.5,
+      'temperature': 22,
+    }),
+    'measured_at': datetime.datetime(2023, 10, 2, 8, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=3600))),
+    'station_id': 10513,
+  })
+# ---
 # name: test_by_city[utrecht]
   dict({
     'air_quality_index': 29,
