@@ -31,6 +31,7 @@ WAQI_URL = "api.waqi.info"
         "utrecht",
         "maarssen",
         "klundert",
+        "olivias",
         "failing_klundert",
     ],
 )
@@ -80,10 +81,33 @@ async def test_new_dominant_pol(
         waqi.authenticate("test")
         await waqi.get_by_city("maarssen")
         assert (
-            "h is an unsupported value for <enum 'Pollutant'>,"
+            "'h' is an unsupported value for <enum 'Pollutant'>,"
             " please report this at https://github.com/joostlek/python-waqi/issues"
             in caplog.text
         )
+        await waqi.close()
+
+
+async def test_unknown_dominant_pol(
+    aresponses: ResponsesMockServer,
+) -> None:
+    """Test retrieving unknown dominant pol."""
+    aresponses.add(
+        WAQI_URL,
+        "/feed/maarssen?token=test",
+        "GET",
+        aresponses.Response(
+            status=200,
+            headers={"Content-Type": "application/json"},
+            text=load_fixture("city_feed_unknown_dominant_pol.json"),
+        ),
+        match_querystring=True,
+    )
+    async with aiohttp.ClientSession() as session:
+        waqi = WAQIClient(session=session)
+        waqi.authenticate("test")
+        air_quality = await waqi.get_by_city("maarssen")
+        assert air_quality.dominant_pollutant is None
         await waqi.close()
 
 

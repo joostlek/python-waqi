@@ -1,0 +1,177 @@
+{
+    "status": "ok",
+    "data": {
+        "aqi": 8,
+        "idx": 10513,
+        "attributions": [
+            {
+                "url": "http://qualar.apambiente.pt/",
+                "name": "Portugal -Agencia Portuguesa do Ambiente - Qualidade do Ar",
+                "logo": "portugal-qualar.png"
+            },
+            {
+                "url": "http://www.eea.europa.eu/themes/air/",
+                "name": "European Environment Agency",
+                "logo": "Europe-EEA.png"
+            },
+            {
+                "url": "https://waqi.info/",
+                "name": "World Air Quality Index Project"
+            }
+        ],
+        "city": {
+            "geo": [
+                38.768888888889,
+                -9.1080555555556
+            ],
+            "name": "Olivais, Lisboa, Portugal",
+            "url": "https://aqicn.org/city/portugal/lisboa/olivais",
+            "location": ""
+        },
+        "dominentpol": "",
+        "iaqi": {
+            "dew": {
+                "v": 18
+            },
+            "h": {
+                "v": 78
+            },
+            "no2": {
+                "v": 29.7
+            },
+            "o3": {
+                "v": 7.8
+            },
+            "p": {
+                "v": 1021
+            },
+            "pm10": {
+                "v": 27
+            },
+            "pm25": {
+                "v": 51
+            },
+            "so2": {
+                "v": 2.5
+            },
+            "t": {
+                "v": 22
+            },
+            "w": {
+                "v": 1.5
+            },
+            "wg": {
+                "v": 10.8
+            }
+        },
+        "time": {
+            "s": "2023-10-02 08:00:00",
+            "tz": "+01:00",
+            "v": 1696233600,
+            "iso": "2023-10-02T08:00:00+01:00"
+        },
+        "forecast": {
+            "daily": {
+                "o3": [
+                    {
+                        "avg": 24,
+                        "day": "2023-10-02",
+                        "max": 45,
+                        "min": 17
+                    },
+                    {
+                        "avg": 29,
+                        "day": "2023-10-03",
+                        "max": 42,
+                        "min": 25
+                    },
+                    {
+                        "avg": 22,
+                        "day": "2023-10-04",
+                        "max": 35,
+                        "min": 14
+                    },
+                    {
+                        "avg": 25,
+                        "day": "2023-10-05",
+                        "max": 42,
+                        "min": 20
+                    },
+                    {
+                        "avg": 25,
+                        "day": "2023-10-06",
+                        "max": 25,
+                        "min": 25
+                    }
+                ],
+                "pm10": [
+                    {
+                        "avg": 39,
+                        "day": "2023-10-02",
+                        "max": 47,
+                        "min": 29
+                    },
+                    {
+                        "avg": 29,
+                        "day": "2023-10-03",
+                        "max": 34,
+                        "min": 25
+                    },
+                    {
+                        "avg": 22,
+                        "day": "2023-10-04",
+                        "max": 27,
+                        "min": 17
+                    },
+                    {
+                        "avg": 26,
+                        "day": "2023-10-05",
+                        "max": 30,
+                        "min": 23
+                    },
+                    {
+                        "avg": 24,
+                        "day": "2023-10-06",
+                        "max": 24,
+                        "min": 22
+                    }
+                ],
+                "pm25": [
+                    {
+                        "avg": 80,
+                        "day": "2023-10-02",
+                        "max": 90,
+                        "min": 68
+                    },
+                    {
+                        "avg": 64,
+                        "day": "2023-10-03",
+                        "max": 74,
+                        "min": 57
+                    },
+                    {
+                        "avg": 59,
+                        "day": "2023-10-04",
+                        "max": 67,
+                        "min": 40
+                    },
+                    {
+                        "avg": 63,
+                        "day": "2023-10-05",
+                        "max": 69,
+                        "min": 58
+                    },
+                    {
+                        "avg": 58,
+                        "day": "2023-10-06",
+                        "max": 60,
+                        "min": 58
+                    }
+                ]
+            }
+        },
+        "debug": {
+            "sync": "2023-10-02T19:28:50+09:00"
+        }
+    }
+}
