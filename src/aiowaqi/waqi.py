@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING, Any, cast
 
 from aiohttp import ClientSession
 from aiohttp.hdrs import METH_GET
-import async_timeout
 from yarl import URL
 
 from .exceptions import (
@@ -86,7 +85,7 @@ class WAQIClient:
             data = {}
         data["token"] = self._token
         try:
-            async with async_timeout.timeout(self.request_timeout):
+            async with asyncio.timeout(self.request_timeout):
                 response = await self.session.request(
                     METH_GET,
                     str(url.with_query(data)).replace("search", "search/"),
