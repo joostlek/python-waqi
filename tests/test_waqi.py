@@ -301,6 +301,7 @@ async def test_get_unknown_by_name(
     [
         6337,
         372382,
+        10142,
     ],
 )
 async def test_get_by_station_number(
