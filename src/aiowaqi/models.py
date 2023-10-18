@@ -19,6 +19,7 @@ class Pollutant(StrEnum):
     SULFUR_DIOXIDE = "so2"
     PM10 = "pm10"
     PM25 = "pm25"
+    NEPHELOMETRY = "neph"
 
 
 @dataclass(slots=True)
@@ -102,6 +103,7 @@ class WAQIExtendedAirQuality:
 
     carbon_monoxide: float | None
     humidity: float | None
+    nephelometry: float | None
     nitrogen_dioxide: float | None
     ozone: float | None
     pressure: float | None
@@ -116,6 +118,7 @@ class WAQIExtendedAirQuality:
         return cls(
             carbon_monoxide=air_quality.get("co", {}).get("v"),
             humidity=air_quality.get("h", {}).get("v"),
+            nephelometry=air_quality.get("neph", {}).get("v"),
             nitrogen_dioxide=air_quality.get("no2", {}).get("v"),
             ozone=air_quality.get("o3", {}).get("v"),
             pressure=air_quality.get("p", {}).get("v"),

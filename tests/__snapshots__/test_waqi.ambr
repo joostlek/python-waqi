@@ -32,6 +32,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
+      'nephelometry': None,
       'nitrogen_dioxide': 1.6,
       'ozone': None,
       'pm10': 4,
@@ -77,6 +78,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
+      'nephelometry': None,
       'nitrogen_dioxide': 1.6,
       'ozone': None,
       'pm10': 4,
@@ -117,6 +119,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 77.5,
+      'nephelometry': None,
       'nitrogen_dioxide': 3.9,
       'ozone': 29.2,
       'pm10': 12,
@@ -162,6 +165,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 78,
+      'nephelometry': None,
       'nitrogen_dioxide': 29.7,
       'ozone': 7.8,
       'pm10': 27,
@@ -202,6 +206,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 73.2,
+      'nephelometry': None,
       'nitrogen_dioxide': 0.7,
       'ozone': 29.4,
       'pm10': 12,
@@ -242,6 +247,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 80,
+      'nephelometry': None,
       'nitrogen_dioxide': 2.3,
       'ozone': 29.4,
       'pm10': 12,
@@ -282,6 +288,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': 2.3,
       'humidity': 69.5,
+      'nephelometry': None,
       'nitrogen_dioxide': 0.7,
       'ozone': 26.4,
       'pm10': 9,
@@ -327,6 +334,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
+      'nephelometry': None,
       'nitrogen_dioxide': 2,
       'ozone': None,
       'pm10': 5,
@@ -372,6 +380,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
+      'nephelometry': None,
       'nitrogen_dioxide': 2,
       'ozone': None,
       'pm10': 5,
@@ -382,6 +391,47 @@
     }),
     'measured_at': datetime.datetime(2023, 8, 7, 19, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=7200))),
     'station_id': 6337,
+  })
+# ---
+# name: test_get_by_station_number[10142]
+  dict({
+    'air_quality_index': 23,
+    'attributions': list([
+      dict({
+        'logo': 'Australia-NSW.png',
+        'name': 'Office of Environment and Heritage - NSW',
+        'url': 'https://www.environment.nsw.gov.au/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': dict({
+        'latitude': -33.765278,
+        'longitude': 151.13579,
+      }),
+      'external_url': 'https://aqicn.org/city/australia/nsw/macquarie-park/sydney-east',
+      'location': None,
+      'name': 'Macquarie Park Sydney East',
+    }),
+    'dominant_pollutant': <Pollutant.NEPHELOMETRY: 'neph'>,
+    'extended_air_quality': dict({
+      'carbon_monoxide': 1.2,
+      'humidity': 48.3,
+      'nephelometry': 2,
+      'nitrogen_dioxide': 1,
+      'ozone': 23.3,
+      'pm10': 11,
+      'pm25': 2,
+      'pressure': 1027,
+      'sulfur_dioxide': 1.5,
+      'temperature': 18.7,
+    }),
+    'measured_at': datetime.datetime(2023, 10, 18, 17, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=39600))),
+    'station_id': 10142,
   })
 # ---
 # name: test_get_by_station_number[372382]
@@ -412,6 +462,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 38,
+      'nephelometry': None,
       'nitrogen_dioxide': None,
       'ozone': None,
       'pm10': 59,
@@ -457,6 +508,7 @@
     'extended_air_quality': dict({
       'carbon_monoxide': None,
       'humidity': 71.6,
+      'nephelometry': None,
       'nitrogen_dioxide': 2,
       'ozone': None,
       'pm10': 5,
