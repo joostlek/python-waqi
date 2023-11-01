@@ -521,6 +521,47 @@
     'station_id': 6337,
   })
 # ---
+# name: test_get_by_station_number[10002]
+  dict({
+    'air_quality_index': None,
+    'attributions': list([
+      dict({
+        'logo': 'Finland-ilmanlaatu.png',
+        'name': 'Ilmanlaatu - Air Quality in finland',
+        'url': 'http://www.ilmanlaatu.fi/',
+      }),
+      dict({
+        'logo': None,
+        'name': 'World Air Quality Index Project',
+        'url': 'https://waqi.info/',
+      }),
+    ]),
+    'city': dict({
+      'coordinates': dict({
+        'latitude': 60.93642,
+        'longitude': 25.96135,
+      }),
+      'external_url': 'https://aqicn.org/city/finland/nastola/rakokiventie-siirrettava',
+      'location': None,
+      'name': 'Rakokiventie siirrettävä, Nastola, Finland',
+    }),
+    'dominant_pollutant': None,
+    'extended_air_quality': dict({
+      'carbon_monoxide': None,
+      'humidity': 93,
+      'nephelometry': None,
+      'nitrogen_dioxide': None,
+      'ozone': None,
+      'pm10': None,
+      'pm25': None,
+      'pressure': 1025,
+      'sulfur_dioxide': None,
+      'temperature': 5,
+    }),
+    'measured_at': None,
+    'station_id': 10002,
+  })
+# ---
 # name: test_search[failing_klundert]
   list([
     dict({

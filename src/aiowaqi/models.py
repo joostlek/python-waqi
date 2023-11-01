@@ -139,7 +139,7 @@ class WAQIAirQuality:
     city: City
     extended_air_quality: WAQIExtendedAirQuality
     dominant_pollutant: Pollutant | None
-    measured_at: datetime
+    measured_at: datetime | None
 
     @classmethod
     def from_dict(cls, air_quality: dict[str, Any]) -> Self:
@@ -154,6 +154,10 @@ class WAQIAirQuality:
         else:
             dominant_pollutant = to_nullable_enum(Pollutant, air_quality["dominentpol"])
 
+        measured_at: datetime | None = None
+        if "iso" in air_quality["time"]:
+            measured_at = datetime.fromisoformat(air_quality["time"]["iso"])
+
         return cls(
             air_quality_index=aqi,
             station_id=air_quality["idx"],
@@ -164,7 +168,7 @@ class WAQIAirQuality:
             city=City.from_dict(air_quality["city"]),
             extended_air_quality=WAQIExtendedAirQuality.from_dict(air_quality["iaqi"]),
             dominant_pollutant=dominant_pollutant,
-            measured_at=datetime.fromisoformat(air_quality["time"]["iso"]),
+            measured_at=measured_at,
         )
 
 

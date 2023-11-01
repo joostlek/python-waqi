@@ -1,0 +1,217 @@
+{
+    "status": "ok",
+    "data": {
+        "aqi": "-",
+        "idx": 10002,
+        "attributions": [
+            {
+                "url": "http://www.ilmanlaatu.fi/",
+                "name": "Ilmanlaatu - Air Quality in finland",
+                "logo": "Finland-ilmanlaatu.png"
+            },
+            {
+                "url": "https://waqi.info/",
+                "name": "World Air Quality Index Project"
+            }
+        ],
+        "city": {
+            "geo": [
+                60.93642,
+                25.96135
+            ],
+            "name": "Rakokiventie siirrettävä, Nastola, Finland",
+            "url": "https://aqicn.org/city/finland/nastola/rakokiventie-siirrettava",
+            "location": ""
+        },
+        "dominentpol": "",
+        "iaqi": {
+            "dew": {
+                "v": 4
+            },
+            "h": {
+                "v": 93
+            },
+            "p": {
+                "v": 1025
+            },
+            "t": {
+                "v": 5
+            },
+            "w": {
+                "v": 2
+            },
+            "wg": {
+                "v": 11.3
+            }
+        },
+        "time": {
+            "tz": "+03:00",
+            "v": 0
+        },
+        "forecast": {
+            "daily": {
+                "o3": [
+                    {
+                        "avg": 22,
+                        "day": "2022-09-06",
+                        "max": 26,
+                        "min": 17
+                    },
+                    {
+                        "avg": 20,
+                        "day": "2022-09-07",
+                        "max": 23,
+                        "min": 18
+                    },
+                    {
+                        "avg": 18,
+                        "day": "2022-09-08",
+                        "max": 23,
+                        "min": 14
+                    },
+                    {
+                        "avg": 20,
+                        "day": "2022-09-09",
+                        "max": 27,
+                        "min": 15
+                    },
+                    {
+                        "avg": 22,
+                        "day": "2022-09-10",
+                        "max": 28,
+                        "min": 15
+                    },
+                    {
+                        "avg": 22,
+                        "day": "2022-09-11",
+                        "max": 22,
+                        "min": 19
+                    }
+                ],
+                "pm10": [
+                    {
+                        "avg": 3,
+                        "day": "2022-09-06",
+                        "max": 4,
+                        "min": 2
+                    },
+                    {
+                        "avg": 2,
+                        "day": "2022-09-07",
+                        "max": 3,
+                        "min": 2
+                    },
+                    {
+                        "avg": 4,
+                        "day": "2022-09-08",
+                        "max": 4,
+                        "min": 3
+                    },
+                    {
+                        "avg": 5,
+                        "day": "2022-09-09",
+                        "max": 5,
+                        "min": 3
+                    },
+                    {
+                        "avg": 5,
+                        "day": "2022-09-10",
+                        "max": 6,
+                        "min": 3
+                    },
+                    {
+                        "avg": 4,
+                        "day": "2022-09-11",
+                        "max": 5,
+                        "min": 4
+                    }
+                ],
+                "pm25": [
+                    {
+                        "avg": 9,
+                        "day": "2022-09-06",
+                        "max": 14,
+                        "min": 6
+                    },
+                    {
+                        "avg": 6,
+                        "day": "2022-09-07",
+                        "max": 7,
+                        "min": 4
+                    },
+                    {
+                        "avg": 8,
+                        "day": "2022-09-08",
+                        "max": 10,
+                        "min": 6
+                    },
+                    {
+                        "avg": 12,
+                        "day": "2022-09-09",
+                        "max": 15,
+                        "min": 8
+                    },
+                    {
+                        "avg": 13,
+                        "day": "2022-09-10",
+                        "max": 19,
+                        "min": 9
+                    },
+                    {
+                        "avg": 13,
+                        "day": "2022-09-11",
+                        "max": 15,
+                        "min": 13
+                    }
+                ],
+                "uvi": [
+                    {
+                        "avg": 0,
+                        "day": "2022-09-06",
+                        "max": 3,
+                        "min": 0
+                    },
+                    {
+                        "avg": 0,
+                        "day": "2022-09-07",
+                        "max": 2,
+                        "min": 0
+                    },
+                    {
+                        "avg": 0,
+                        "day": "2022-09-08",
+                        "max": 2,
+                        "min": 0
+                    },
+                    {
+                        "avg": 0,
+                        "day": "2022-09-09",
+                        "max": 2,
+                        "min": 0
+                    },
+                    {
+                        "avg": 0,
+                        "day": "2022-09-10",
+                        "max": 1,
+                        "min": 0
+                    },
+                    {
+                        "avg": 0,
+                        "day": "2022-09-11",
+                        "max": 2,
+                        "min": 0
+                    },
+                    {
+                        "avg": 1,
+                        "day": "2022-09-12",
+                        "max": 2,
+                        "min": 0
+                    }
+                ]
+            }
+        },
+        "debug": {
+            "sync": "2022-09-08T14:51:43+09:00"
+        }
+    }
+}
