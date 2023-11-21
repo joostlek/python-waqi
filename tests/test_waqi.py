@@ -237,7 +237,6 @@ async def test_search(
             headers={"Content-Type": "application/json"},
             text=load_fixture(f"search_{keyword}.json"),
         ),
-        match_querystring=True,
     )
     async with WAQIClient() as waqi:
         waqi.authenticate("test")
