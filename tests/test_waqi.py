@@ -230,7 +230,7 @@ async def test_search(
     """Test searching stations."""
     aresponses.add(
         WAQI_URL,
-        f"/search?keyword={keyword}&token=test",
+        f"/search?token=test&keyword={keyword}",
         "GET",
         aresponses.Response(
             status=200,
