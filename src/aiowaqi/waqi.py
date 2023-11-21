@@ -88,7 +88,7 @@ class WAQIClient:
             async with asyncio.timeout(self.request_timeout):
                 response = await self.session.request(
                     METH_GET,
-                    str(url.with_query(data)).replace("search", "search/"),
+                    url.with_query(data),
                     headers=headers,
                 )
         except asyncio.TimeoutError as exception:
