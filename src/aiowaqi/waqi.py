@@ -86,10 +86,9 @@ class WAQIClient:
         data["token"] = self._token
         try:
             async with asyncio.timeout(self.request_timeout):
-                print(str(url.with_query(data)).replace("search", "search/"))
                 response = await self.session.request(
                     METH_GET,
-                    str(url.with_query(data)).replace("search", "search/"),
+                    url.with_query(data),
                     headers=headers,
                 )
         except asyncio.TimeoutError as exception:
@@ -159,7 +158,7 @@ class WAQIClient:
 
     async def search(self, keyword: str) -> list[WAQISearchResult]:
         """Search for stations with a keyword."""
-        response = await self._request("search", data={"keyword": keyword})
+        response = await self._request("search/", data={"keyword": keyword})
         return [WAQISearchResult.from_dict(station) for station in response["data"]]
 
     async def close(self) -> None:
