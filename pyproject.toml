@@ -16,7 +16,6 @@ classifiers = [
   "Intended Audience :: Developers",
   "Natural Language :: English",
   "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
@@ -36,14 +35,14 @@ blacken-docs = "1.16.0"
 codespell = "2.2.6"
 covdefaults = "2.3.0"
 coverage = {version = "7.3.2", extras = ["toml"]}
-mypy = "1.7.1"
+mypy = "1.7.0"
 pre-commit = "3.5.0"
 pre-commit-hooks = "4.5.0"
 pylint = "3.0.2"
 pytest = "7.4.3"
-pytest-asyncio = "0.23.2"
+pytest-asyncio = "0.21.1"
 pytest-cov = "4.1.0"
-ruff = "0.1.7"
+ruff = "0.1.6"
 safety = "2.4.0b2"
 yamllint = "1.33.0"
 syrupy = "4.6.0"
