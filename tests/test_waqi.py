@@ -2,13 +2,12 @@
 from __future__ import annotations
 
 import asyncio
-from dataclasses import asdict
+from typing import TYPE_CHECKING
 
 import aiohttp
 from aiohttp.web_request import BaseRequest
 from aresponses import Response, ResponsesMockServer
 import pytest
-from syrupy import SnapshotAssertion
 
 from aiowaqi import (
     WAQIAirQuality,
@@ -21,6 +20,9 @@ from aiowaqi import (
 )
 
 from . import load_fixture
+
+if TYPE_CHECKING:
+    from syrupy import SnapshotAssertion
 
 WAQI_URL = "api.waqi.info"
 
@@ -54,7 +56,7 @@ async def test_by_city(
         match_querystring=True,
     )
     response: WAQIAirQuality = await authenticated_client.get_by_city(city)
-    assert asdict(response) == snapshot
+    assert response == snapshot
 
 
 async def test_new_dominant_pol(
@@ -230,8 +232,7 @@ async def test_search(
         match_querystring=True,
     )
     response: list[WAQISearchResult] = await authenticated_client.search(keyword)
-    res = [asdict(wsr) for wsr in response]
-    assert res == snapshot
+    assert response == snapshot
 
 
 @pytest.mark.parametrize(
@@ -260,7 +261,7 @@ async def test_get_by_name(
         match_querystring=True,
     )
     response = await authenticated_client.get_by_name(name)
-    assert asdict(response) == snapshot
+    assert response == snapshot
 
 
 async def test_get_unknown_by_name(
@@ -310,7 +311,7 @@ async def test_get_by_station_number(
         match_querystring=True,
     )
     response = await authenticated_client.get_by_station_number(station_number)
-    assert asdict(response) == snapshot
+    assert response == snapshot
 
 
 @pytest.mark.parametrize(
@@ -358,7 +359,7 @@ async def test_get_by_coordinates(
         ),
     )
     response = await authenticated_client.get_by_coordinates(52.105031, 5.124464)
-    assert asdict(response) == snapshot
+    assert response == snapshot
 
 
 async def test_get_by_ip(
@@ -378,4 +379,4 @@ async def test_get_by_ip(
         ),
     )
     response = await authenticated_client.get_by_ip()
-    assert asdict(response) == snapshot
+    assert response == snapshot

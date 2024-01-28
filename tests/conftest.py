@@ -5,6 +5,15 @@ import aiohttp
 import pytest
 
 from aiowaqi import WAQIClient
+from syrupy import SnapshotAssertion
+
+from .syrupy import WAQISnapshotExtension
+
+
+@pytest.fixture(name="snapshot")
+def snapshot_assertion(snapshot: SnapshotAssertion) -> SnapshotAssertion:
+    """Return snapshot assertion fixture with the WAQI extension."""
+    return snapshot.use_extension(WAQISnapshotExtension)
 
 
 @pytest.fixture(name="waqi_client")
