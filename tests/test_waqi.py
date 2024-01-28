@@ -36,6 +36,7 @@ WAQI_URL = "api.waqi.info"
     ],
 )
 async def test_by_city(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     city: str,
     snapshot: SnapshotAssertion,
@@ -52,15 +53,12 @@ async def test_by_city(
         ),
         match_querystring=True,
     )
-    async with aiohttp.ClientSession() as session:
-        waqi = WAQIClient(session=session)
-        waqi.authenticate("test")
-        response: WAQIAirQuality = await waqi.get_by_city(city)
-        assert asdict(response) == snapshot
-        await waqi.close()
+    response: WAQIAirQuality = await authenticated_client.get_by_city(city)
+    assert asdict(response) == snapshot
 
 
 async def test_new_dominant_pol(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     caplog: pytest.LogCaptureFixture,
 ) -> None:
@@ -76,20 +74,17 @@ async def test_new_dominant_pol(
         ),
         match_querystring=True,
     )
-    async with aiohttp.ClientSession() as session:
-        waqi = WAQIClient(session=session)
-        waqi.authenticate("test")
-        await waqi.get_by_city("maarssen")
-        assert (
-            "'h' is an unsupported value for <enum 'Pollutant'>,"
-            " please report this at https://github.com/joostlek/python-waqi/issues"
-            in caplog.text
-        )
-        await waqi.close()
+    await authenticated_client.get_by_city("maarssen")
+    assert (
+        "'h' is an unsupported value for <enum 'Pollutant'>,"
+        " please report this at https://github.com/joostlek/python-waqi/issues"
+        in caplog.text
+    )
 
 
 async def test_unknown_dominant_pol(
     aresponses: ResponsesMockServer,
+    authenticated_client: WAQIClient,
 ) -> None:
     """Test retrieving unknown dominant pol."""
     aresponses.add(
@@ -103,12 +98,8 @@ async def test_unknown_dominant_pol(
         ),
         match_querystring=True,
     )
-    async with aiohttp.ClientSession() as session:
-        waqi = WAQIClient(session=session)
-        waqi.authenticate("test")
-        air_quality = await waqi.get_by_city("maarssen")
-        assert air_quality.dominant_pollutant is None
-        await waqi.close()
+    air_quality = await authenticated_client.get_by_city("maarssen")
+    assert air_quality.dominant_pollutant is None
 
 
 async def test_own_session(
@@ -126,12 +117,14 @@ async def test_own_session(
         ),
     )
     async with WAQIClient() as waqi:
+        assert waqi.session is None
         waqi.authenticate("test")
         await waqi.get_by_city("utrecht")
         assert waqi.session is not None
 
 
 async def test_unexpected_server_response(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
 ) -> None:
     """Test handling unexpected response."""
@@ -145,13 +138,12 @@ async def test_unexpected_server_response(
             text="Yes",
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        with pytest.raises(WAQIError):
-            assert await waqi.get_by_city("utrecht")
+    with pytest.raises(WAQIError):
+        assert await authenticated_client.get_by_city("utrecht")
 
 
 async def test_unknown_city(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
 ) -> None:
     """Test unknown city."""
@@ -165,13 +157,12 @@ async def test_unknown_city(
             text=load_fixture("city_feed_unknown.json"),
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        with pytest.raises(WAQIError):
-            assert await waqi.get_by_city("unknown")
+    with pytest.raises(WAQIError):
+        assert await authenticated_client.get_by_city("unknown")
 
 
 async def test_unauthenticated(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
 ) -> None:
     """Test unauthenticated."""
@@ -185,10 +176,8 @@ async def test_unauthenticated(
             text=load_fixture("unauthenticated.json"),
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        with pytest.raises(WAQIAuthenticationError):
-            assert await waqi.get_by_city("utrecht")
+    with pytest.raises(WAQIAuthenticationError):
+        assert await authenticated_client.get_by_city("utrecht")
 
 
 async def test_timeout(aresponses: ResponsesMockServer) -> None:
@@ -223,6 +212,7 @@ async def test_timeout(aresponses: ResponsesMockServer) -> None:
     ],
 )
 async def test_search(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     keyword: str,
     snapshot: SnapshotAssertion,
@@ -239,11 +229,9 @@ async def test_search(
         ),
         match_querystring=True,
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        response: list[WAQISearchResult] = await waqi.search(keyword)
-        res = [asdict(wsr) for wsr in response]
-        assert res == snapshot
+    response: list[WAQISearchResult] = await authenticated_client.search(keyword)
+    res = [asdict(wsr) for wsr in response]
+    assert res == snapshot
 
 
 @pytest.mark.parametrize(
@@ -254,6 +242,7 @@ async def test_search(
     ],
 )
 async def test_get_by_name(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     name: str,
     snapshot: SnapshotAssertion,
@@ -270,13 +259,12 @@ async def test_get_by_name(
         ),
         match_querystring=True,
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        response = await waqi.get_by_name(name)
-        assert asdict(response) == snapshot
+    response = await authenticated_client.get_by_name(name)
+    assert asdict(response) == snapshot
 
 
 async def test_get_unknown_by_name(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
 ) -> None:
     """Test getting unknown station by name."""
@@ -290,10 +278,8 @@ async def test_get_unknown_by_name(
             text=load_fixture("name_feed_unknown.json"),
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        with pytest.raises(WAQIUnknownStationError):
-            await waqi.get_by_name("unknown")
+    with pytest.raises(WAQIUnknownStationError):
+        await authenticated_client.get_by_name("unknown")
 
 
 @pytest.mark.parametrize(
@@ -306,6 +292,7 @@ async def test_get_unknown_by_name(
     ],
 )
 async def test_get_by_station_number(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     station_number: int,
     snapshot: SnapshotAssertion,
@@ -322,10 +309,8 @@ async def test_get_by_station_number(
         ),
         match_querystring=True,
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        response = await waqi.get_by_station_number(station_number)
-        assert asdict(response) == snapshot
+    response = await authenticated_client.get_by_station_number(station_number)
+    assert asdict(response) == snapshot
 
 
 @pytest.mark.parametrize(
@@ -337,6 +322,7 @@ async def test_get_by_station_number(
     ],
 )
 async def test_get_unknown_by_station_number(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     identifier: str,
 ) -> None:
@@ -351,13 +337,12 @@ async def test_get_unknown_by_station_number(
             text=load_fixture(f"station_number_feed_{identifier}.json"),
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        with pytest.raises(WAQIUnknownStationError):
-            await waqi.get_by_station_number(0)
+    with pytest.raises(WAQIUnknownStationError):
+        await authenticated_client.get_by_station_number(0)
 
 
 async def test_get_by_coordinates(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     snapshot: SnapshotAssertion,
 ) -> None:
@@ -372,13 +357,12 @@ async def test_get_by_coordinates(
             text=load_fixture("coordinates.json"),
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        response = await waqi.get_by_coordinates(52.105031, 5.124464)
-        assert asdict(response) == snapshot
+    response = await authenticated_client.get_by_coordinates(52.105031, 5.124464)
+    assert asdict(response) == snapshot
 
 
 async def test_get_by_ip(
+    authenticated_client: WAQIClient,
     aresponses: ResponsesMockServer,
     snapshot: SnapshotAssertion,
 ) -> None:
@@ -393,7 +377,5 @@ async def test_get_by_ip(
             text=load_fixture("here.json"),
         ),
     )
-    async with WAQIClient() as waqi:
-        waqi.authenticate("test")
-        response = await waqi.get_by_ip()
-        assert asdict(response) == snapshot
+    response = await authenticated_client.get_by_ip()
+    assert asdict(response) == snapshot
