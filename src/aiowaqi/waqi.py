@@ -64,6 +64,7 @@ class WAQIClient:
                 the WAQI API.
             WAQIError: Received an unexpected response from the WAQI API.
             WAQIAuthenticationError: Used token is invalid.
+
         """
         version = metadata.version(__package__)
         url = URL.build(
@@ -172,6 +173,7 @@ class WAQIClient:
         Returns
         -------
             The WAQIClient object.
+
         """
         return self
 
@@ -181,5 +183,6 @@ class WAQIClient:
         Args:
         ----
             _exc_info: Exec type.
+
         """
         await self.close()
