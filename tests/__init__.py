@@ -1,4 +1,5 @@
 """Tests for the WAQI Library."""
+
 from pathlib import Path
 
 
