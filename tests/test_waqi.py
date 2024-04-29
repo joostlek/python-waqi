@@ -1,4 +1,5 @@
 """Tests for the WAQI Library."""
+
 from __future__ import annotations
 
 import asyncio

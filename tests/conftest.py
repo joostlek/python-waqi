@@ -1,4 +1,5 @@
 """Fixtures for the aiowaqi package."""
+
 from typing import AsyncGenerator
 
 import aiohttp
