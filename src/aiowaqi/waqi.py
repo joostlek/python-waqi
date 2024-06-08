@@ -23,6 +23,8 @@ from .models import WAQIAirQuality, WAQISearchResult
 if TYPE_CHECKING:
     from typing_extensions import Self
 
+VERSION = metadata.version(__package__)
+
 
 @dataclass
 class WAQIClient:
@@ -67,7 +69,6 @@ class WAQIClient:
             WAQIAuthenticationError: Used token is invalid.
 
         """
-        version = metadata.version(__package__)
         url = URL.build(
             scheme="https",
             host=self.api_host,
@@ -75,7 +76,7 @@ class WAQIClient:
         ).joinpath(uri)
 
         headers = {
-            "User-Agent": f"WAQIAsync/{version}",
+            "User-Agent": f"WAQIAsync/{VERSION}",
             "Accept": "application/json, text/plain, */*",
         }
 
