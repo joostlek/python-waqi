@@ -1,6 +1,6 @@
 """Fixtures for the aiowaqi package."""
 
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 import aiohttp
 import pytest
@@ -20,9 +20,12 @@ def snapshot_assertion(snapshot: SnapshotAssertion) -> SnapshotAssertion:
 @pytest.fixture(name="waqi_client")
 async def client() -> AsyncGenerator[WAQIClient, None]:
     """Return a WAQI client."""
-    async with aiohttp.ClientSession() as session, WAQIClient(
-        session=session,
-    ) as waqi_client:
+    async with (
+        aiohttp.ClientSession() as session,
+        WAQIClient(
+            session=session,
+        ) as waqi_client,
+    ):
         yield waqi_client
 
 
