@@ -19,17 +19,17 @@ from .models import (
 from .waqi import WAQIClient
 
 __all__ = [
-    "WAQIError",
-    "WAQIUnknownStationError",
-    "WAQIUnknownCityError",
-    "Location",
-    "WAQISearchResult",
-    "WAQIAuthenticationError",
-    "WAQIClient",
-    "WAQIConnectionError",
     "Attribution",
     "City",
     "Coordinates",
-    "WAQIExtendedAirQuality",
+    "Location",
     "WAQIAirQuality",
+    "WAQIAuthenticationError",
+    "WAQIClient",
+    "WAQIConnectionError",
+    "WAQIError",
+    "WAQIExtendedAirQuality",
+    "WAQISearchResult",
+    "WAQIUnknownCityError",
+    "WAQIUnknownStationError",
 ]
