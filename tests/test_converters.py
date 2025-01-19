@@ -25,42 +25,43 @@ def test_invalid_aqi_values() -> None:
 def test_pm25_conversion() -> None:
     """Test PM2.5 AQI to concentration conversion."""
     assert aqi_to_pm25(0) == 0.0
-    assert aqi_to_pm25(75) == 22.0
-    assert aqi_to_pm25(150) == 55.4
-    assert aqi_to_pm25(300) == 225.4
-    assert aqi_to_pm25(400) == 275.2
-    assert aqi_to_pm25(501) == 325.9
+    assert aqi_to_pm25(75) == 23.8
+    assert aqi_to_pm25(150) == 55.5
+    assert aqi_to_pm25(300) == 250.5
+    assert aqi_to_pm25(400) == 350.5
+    assert aqi_to_pm25(500) == 500.5
 
 
 def test_pm10_conversion() -> None:
     """Test PM10 AQI to concentration conversion."""
     assert aqi_to_pm10(0) == 0
-    assert aqi_to_pm10(75) == 103
-    assert aqi_to_pm10(150) == 254
-    assert aqi_to_pm10(155) == 263
-    assert aqi_to_pm10(300) == 424
-    assert aqi_to_pm10(400) == 514
-    assert aqi_to_pm10(501) == 605
+    assert aqi_to_pm10(75) == 105
+    assert aqi_to_pm10(150) == 255
+    assert aqi_to_pm10(155) == 265
+    assert aqi_to_pm10(300) == 425
+    assert aqi_to_pm10(400) == 505
+    assert aqi_to_pm10(500) == 605
 
 
 def test_co_conversion() -> None:
     """Test CO AQI to concentration conversion."""
     assert aqi_to_co(0) == 0.0
-    assert aqi_to_co(75) == 6.9
-    assert aqi_to_co(150) == 12.4
-    assert aqi_to_co(175) == 13.9
-    assert aqi_to_co(300) == 30.4
-    assert aqi_to_co(400) == 40.4
-    assert aqi_to_co(501) == 50.5
+    assert aqi_to_co(75) == 7.0
+    assert aqi_to_co(150) == 12.5
+    assert aqi_to_co(175) == 14.0
+    assert aqi_to_co(300) == 30.5
+    assert aqi_to_co(400) == 40.5
+    assert aqi_to_co(500) == 50.5
 
 
 def test_o3_8h_conversion() -> None:
     """Test 8-hour Ozone AQI to concentration conversion."""
     assert aqi_to_o3_8h(0) == 0
-    assert aqi_to_o3_8h(75) == 62
-    assert aqi_to_o3_8h(150) == 85
-    assert aqi_to_o3_8h(180) == 97
-    assert aqi_to_o3_8h(250) == 153
+    assert aqi_to_o3_8h(66) == 0.065
+    assert aqi_to_o3_8h(123) == 0.085
+    assert aqi_to_o3_8h(172) == 0.105
+    assert aqi_to_o3_8h(240) == 0.220
+    assert aqi_to_o3_8h(300) == 0.375
 
     with pytest.raises(ValueError, match="For AQI > 300, use 1-hour Ozone values"):
         aqi_to_o3_8h(301)
@@ -71,22 +72,24 @@ def test_o3_1h_conversion() -> None:
     with pytest.raises(ValueError, match="For AQI <= 100, use 8-hour Ozone values"):
         aqi_to_o3_1h(75)
 
-    assert aqi_to_o3_1h(125) == 144
-    assert aqi_to_o3_1h(175) == 184
-    assert aqi_to_o3_1h(250) == 303
-    assert aqi_to_o3_1h(400) == 503
-    assert aqi_to_o3_1h(501) == 605
+    assert aqi_to_o3_1h(125) == 0.145
+    assert aqi_to_o3_1h(175) == 0.185
+    assert aqi_to_o3_1h(250) == 0.305
+    assert aqi_to_o3_1h(400) == 0.505
+    assert aqi_to_o3_1h(500) == 0.605
 
 
 def test_no2_conversion() -> None:
     """Test NO2 AQI to concentration conversion."""
     assert aqi_to_no2(0) == 0
-    assert aqi_to_no2(75) == 77
-    assert aqi_to_no2(150) == 360
-    assert aqi_to_no2(180) == 531
-    assert aqi_to_no2(300) == 1249
-    assert aqi_to_no2(400) == 1647
-    assert aqi_to_no2(501) == 2053
+    assert aqi_to_no2(40) == 0.043
+    assert aqi_to_no2(55) == 0.059
+    assert aqi_to_no2(120) == 0.205
+    assert aqi_to_no2(175) == 0.506
+    assert aqi_to_no2(250) == 0.95
+    assert aqi_to_no2(350) == 1.45
+    assert aqi_to_no2(450) == 1.849
+    assert aqi_to_no2(500) == 2.049
 
 
 def test_invalid_ranges() -> None:
@@ -120,7 +123,7 @@ def test_edge_cases() -> None:
     with pytest.raises(ValueError, match="AQI out of range"):
         aqi_to_co(aqi)
     with pytest.raises(ValueError, match="For AQI > 300, use 1-hour Ozone values"):
-        aqi_to_o3_8h(aqi)
+        aqi_to_o3_8h(400)
     with pytest.raises(ValueError, match="AQI out of range"):
         aqi_to_o3_1h(aqi)
     with pytest.raises(ValueError, match="AQI out of range"):

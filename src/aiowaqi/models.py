@@ -108,9 +108,9 @@ class WAQIExtendedAirQuality:
     humidity: float | None
     nephelometry: float | None
     nitrogen_dioxide: float | None
-    nitrogen_dioxide_concentration: int | None
+    nitrogen_dioxide_concentration: float | None
     ozone: float | None
-    ozone_concentration: int | None
+    ozone_concentration: float | None
     pressure: float | None
     sulfur_dioxide: float | None
     pm10: float | None
