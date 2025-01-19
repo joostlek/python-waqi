@@ -21,7 +21,7 @@ from .exceptions import (
 from .models import WAQIAirQuality, WAQISearchResult
 
 if TYPE_CHECKING:
-    from typing_extensions import Self
+    from typing import Self
 
 VERSION = metadata.version(__package__)
 
@@ -94,7 +94,7 @@ class WAQIClient:
                     url.with_query(data),
                     headers=headers,
                 )
-        except asyncio.TimeoutError as exception:
+        except TimeoutError as exception:
             msg = "Timeout occurred while connecting to the WAQI API"
             raise WAQIConnectionError(msg) from exception
 

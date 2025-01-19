@@ -8,6 +8,7 @@ from datetime import datetime
 from enum import StrEnum
 from typing import Any, Self
 
+from aiowaqi import converters
 from aiowaqi.util import to_nullable_enum
 
 
@@ -103,30 +104,52 @@ class WAQIExtendedAirQuality:
     """Represents extended air quality data."""
 
     carbon_monoxide: float | None
+    carbon_monoxide_concentration: float | None
     humidity: float | None
     nephelometry: float | None
     nitrogen_dioxide: float | None
+    nitrogen_dioxide_concentration: int | None
     ozone: float | None
+    ozone_concentration: int | None
     pressure: float | None
     sulfur_dioxide: float | None
     pm10: float | None
+    pm10_concentration: int | None
     pm25: float | None
+    pm25_concentration: float | None
     temperature: float | None
 
     @classmethod
     def from_dict(cls, air_quality: dict[str, Any]) -> Self:
         """Initialize from a dict."""
+        pm25 = air_quality.get("pm25", {}).get("v")
+        pm10 = air_quality.get("pm10", {}).get("v")
+        co = air_quality.get("co", {}).get("v")
+        o3 = air_quality.get("o3", {}).get("v")
+        no2 = air_quality.get("no2", {}).get("v")
+
+        co_concentration = converters.aqi_to_co(co) if co is not None else None
+        o3_concentration = converters.aqi_to_o3_8h(o3) if o3 is not None else None
+        no2_concentration = converters.aqi_to_no2(no2) if no2 is not None else None
+        pm10_concentration = converters.aqi_to_pm10(pm10) if pm10 is not None else None
+        pm25_concentration = converters.aqi_to_pm25(pm25) if pm25 is not None else None
+
         return cls(
-            carbon_monoxide=air_quality.get("co", {}).get("v"),
+            carbon_monoxide=co,
             humidity=air_quality.get("h", {}).get("v"),
             nephelometry=air_quality.get("neph", {}).get("v"),
-            nitrogen_dioxide=air_quality.get("no2", {}).get("v"),
-            ozone=air_quality.get("o3", {}).get("v"),
+            nitrogen_dioxide=no2,
+            ozone=o3,
             pressure=air_quality.get("p", {}).get("v"),
             sulfur_dioxide=air_quality.get("so2", {}).get("v"),
-            pm10=air_quality.get("pm10", {}).get("v"),
-            pm25=air_quality.get("pm25", {}).get("v"),
+            pm10=pm10,
+            pm25=pm25,
             temperature=air_quality.get("t", {}).get("v"),
+            carbon_monoxide_concentration=co_concentration,
+            ozone_concentration=o3_concentration,
+            nitrogen_dioxide_concentration=no2_concentration,
+            pm10_concentration=pm10_concentration,
+            pm25_concentration=pm25_concentration,
         )
 
 
