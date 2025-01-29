@@ -1,33 +1,39 @@
-[tool.poetry]
+[project]
 name = "aiowaqi"
 version = "3.0.0"
 description = "Asynchronous Python client for WAQI API."
-authors = ["Joost Lekkerkerker <joostlek@outlook.com>"]
-maintainers = ["Joost Lekkerkerker <joostlek@outlook.com>"]
-license = "MIT"
+authors = [
+    {name = "Joost Lekkerkerker", email = "joostlek@outlook.com"}
+]
+maintainers = [
+    {name = "Joost Lekkerkerker", email = "joostlek@outlook.com"}
+]
+license = {text = "MIT"}
 readme = "README.md"
-homepage = "https://github.com/joostlek/python-waqi"
-repository = "https://github.com/joostlek/python-waqi"
-documentation = "https://github.com/joostlek/python-waqi"
+requires-python = ">=3.11"
 keywords = ["WAQI", "api", "async", "client"]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
-  "Framework :: AsyncIO",
-  "Intended Audience :: Developers",
-  "Natural Language :: English",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3",
-  "Topic :: Software Development :: Libraries :: Python Modules",
-]
-packages = [
-    { include = "aiowaqi", from = "src" },
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-aiohttp = ">=3.0.0"
-yarl = ">=1.6.0"
+dependencies = [
+    "aiohttp (>=3.0.0)",
+    "yarl (>=1.6.0)",
+]
+
+[project.urls]
+Homepage = "https://github.com/joostlek/python-waqi"
+Repository = "https://github.com/joostlek/python-waqi"
+Documentation = "https://github.com/joostlek/python-waqi"
+"Bug Tracker" = "https://github.com/joostlek/python-waqi/issues"
+Changelog = "https://github.com/joostlek/python-waqi/releases"
 
 [tool.poetry.group.dev.dependencies]
 aresponses = "3.0.0"
@@ -45,10 +51,6 @@ ruff = "0.9.3"
 safety = "3.2.14"
 yamllint = "1.35.1"
 syrupy = "4.8.1"
-
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/joostlek/python-waqi/issues"
-Changelog = "https://github.com/joostlek/python-waqi/releases"
 
 [tool.coverage.report]
 show_missing = true
