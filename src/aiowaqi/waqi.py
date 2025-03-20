@@ -108,7 +108,7 @@ class WAQIClient:
                 {"Content-Type": content_type, "response": text},
             )
 
-        response_data = cast(dict[str, Any], await response.json())
+        response_data = cast("dict[str, Any]", await response.json())
         if (
             response_data["status"] == "error"
             and response_data["data"] == "Invalid key"
