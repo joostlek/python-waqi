@@ -2,17 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Any, TypeVar
+from typing import Any
 
 from .const import LOGGER
 
-_EnumT = TypeVar("_EnumT")
 
-
-def to_nullable_enum(
-    enum_class: type[_EnumT],
+def to_nullable_enum[EnumT](
+    enum_class: type[EnumT],
     value: Any,
-) -> _EnumT | None:
+) -> EnumT | None:
     """Convert a value to an enum and log if it doesn't exist."""
     try:
         return enum_class(value)  # type: ignore[call-arg]

@@ -18,7 +18,7 @@ def snapshot_assertion(snapshot: SnapshotAssertion) -> SnapshotAssertion:
 
 
 @pytest.fixture(name="waqi_client")
-async def client() -> AsyncGenerator[WAQIClient, None]:
+async def client() -> AsyncGenerator[WAQIClient]:
     """Return a WAQI client."""
     async with (
         aiohttp.ClientSession() as session,
