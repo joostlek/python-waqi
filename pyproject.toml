@@ -2,16 +2,17 @@
 name = "aiowaqi"
 version = "3.0.0"
 description = "Asynchronous Python client for WAQI API."
-authors = [
-    {name = "Joost Lekkerkerker", email = "joostlek@outlook.com"}
-]
-maintainers = [
-    {name = "Joost Lekkerkerker", email = "joostlek@outlook.com"}
-]
-license = {text = "MIT"}
-readme = "README.md"
+authors = [{ name = "Joost Lekkerkerker", email = "joostlek@outlook.com" }]
 requires-python = ">=3.13"
-keywords = ["WAQI", "api", "async", "client"]
+readme = "README.md"
+license = { text = "MIT" }
+maintainers = [{ name = "Joost Lekkerkerker", email = "joostlek@outlook.com" }]
+keywords = [
+    "WAQI",
+    "api",
+    "async",
+    "client",
+]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Framework :: AsyncIO",
@@ -22,10 +23,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-
 dependencies = [
-    "aiohttp (>=3.0.0)",
-    "yarl (>=1.6.0)",
+    "aiohttp>=3.0.0",
+    "yarl>=1.6.0",
 ]
 
 [project.urls]
@@ -35,22 +35,40 @@ Documentation = "https://github.com/joostlek/python-waqi"
 "Bug Tracker" = "https://github.com/joostlek/python-waqi/issues"
 Changelog = "https://github.com/joostlek/python-waqi/releases"
 
-[tool.poetry.group.dev.dependencies]
-aresponses = "3.0.0"
-codespell = "2.4.2"
-covdefaults = "2.3.0"
-coverage = {version = "7.14.1", extras = ["toml"]}
-mypy = "1.20.2"
-prek = "0.3.9"
-pre-commit-hooks = "6.0.0"
-pylint = "4.0.5"
-pytest = "9.0.3"
-pytest-asyncio = "1.4.0"
-pytest-cov = "7.1.0"
-ruff = "0.15.15"
-safety = "3.8.1"
-yamllint = "1.38.0"
-syrupy = "5.3.1"
+[dependency-groups]
+dev = [
+    "aresponses==3.0.0",
+    "codespell==2.4.2",
+    "covdefaults==2.3.0",
+    "coverage[toml]==7.14.1",
+    "mypy==1.20.2",
+    "prek==0.3.9",
+    "pre-commit-hooks==6.0.0",
+    "pylint==4.0.5",
+    "pytest==9.0.3",
+    "pytest-asyncio==1.4.0",
+    "pytest-cov==7.1.0",
+    "ruff==0.15.15",
+    "safety==3.8.1",
+    "yamllint==1.38.0",
+    "syrupy==5.3.1",
+]
+
+[tool.uv]
+default-groups = "all"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/aiowaqi"]
+
+[tool.hatch.build.targets.wheel]
+include = ["src/aiowaqi"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/aiowaqi" = "aiowaqi"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.coverage.report]
 show_missing = true
@@ -154,7 +172,3 @@ combine-as-imports = true
 
 [tool.ruff.lint.mccabe]
 max-complexity = 25
-
-[build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core>=1.0.0"]

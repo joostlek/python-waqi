@@ -68,19 +68,19 @@ Thank you for being involved! :heart_eyes:
 
 ## Setting up development environment
 
-This Python project is fully managed using the [Poetry][poetry] dependency manager. But also relies on the use of NodeJS for certain checks during development.
+This Python project is fully managed using the [uv][uv] dependency manager. But also relies on the use of NodeJS for certain checks during development.
 
 You need at least:
 
 - Python 3.13+
-- [Poetry][poetry-install]
+- [uv][uv-install]
 - NodeJS 12+ (including NPM)
 
 To install all packages, including all development requirements:
 
 ```bash
 npm install
-poetry install
+uv sync --all-groups
 ```
 
 As this repository uses the [prek][prek] framework, all changes
@@ -88,13 +88,13 @@ are linted and tested with each commit. You can run all checks and tests
 manually, using the following command:
 
 ```bash
-poetry run prek run --all-files
+uv run prek run --all-files
 ```
 
 To run just the Python tests:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
 ## Authors & contributors
@@ -151,3 +151,5 @@ SOFTWARE.
 [semver]: http://semver.org/spec/v2.0.0.html
 [sonarcloud]: https://sonarcloud.io/summary/new_code?id=joostlek_python-waqi
 [pypi]: https://pypi.org/project/aiowaqi/
+[uv-install]: https://docs.astral.sh/uv/getting-started/installation/
+[uv]: https://docs.astral.sh/uv/
