@@ -3,6 +3,7 @@
 from collections.abc import AsyncGenerator
 
 import aiohttp
+from aiointercept import aiointercept
 import pytest
 
 from aiowaqi import WAQIClient
@@ -15,6 +16,13 @@ from .syrupy import WAQISnapshotExtension
 def snapshot_assertion(snapshot: SnapshotAssertion) -> SnapshotAssertion:
     """Return snapshot assertion fixture with the WAQI extension."""
     return snapshot.use_extension(WAQISnapshotExtension)
+
+
+@pytest.fixture(name="responses")
+async def responses_fixture() -> AsyncGenerator[aiointercept]:
+    """Return aiointercept fixture."""
+    async with aiointercept(mock_external_urls=True) as mocked_responses:
+        yield mocked_responses
 
 
 @pytest.fixture(name="waqi_client")

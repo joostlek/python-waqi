@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import asyncio
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import aiohttp
-from aiohttp.web_request import BaseRequest
-from aresponses import Response, ResponsesMockServer
+from aiointercept import CallbackResult, aiointercept
 import pytest
 
 from aiowaqi import (
@@ -23,9 +22,11 @@ from aiowaqi import (
 from . import load_fixture
 
 if TYPE_CHECKING:
+    from yarl import URL
+
     from syrupy import SnapshotAssertion
 
-WAQI_URL = "api.waqi.info"
+WAQI_URL = "https://api.waqi.info"
 
 
 @pytest.mark.parametrize(
@@ -40,21 +41,16 @@ WAQI_URL = "api.waqi.info"
 )
 async def test_by_city(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     city: str,
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test retrieving air quality by city."""
-    aresponses.add(
-        WAQI_URL,
-        f"/feed/{city}?token=test",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture(f"city_feed_{city}.json"),
-        ),
-        match_querystring=True,
+    responses.get(
+        f"{WAQI_URL}/feed/{city}?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture(f"city_feed_{city}.json"),
     )
     response: WAQIAirQuality = await authenticated_client.get_by_city(city)
     assert response == snapshot
@@ -62,20 +58,15 @@ async def test_by_city(
 
 async def test_new_dominant_pol(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     caplog: pytest.LogCaptureFixture,
 ) -> None:
     """Test retrieving new dominant pol."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/maarssen?token=test",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("city_feed_new_dominant_pol.json"),
-        ),
-        match_querystring=True,
+    responses.get(
+        f"{WAQI_URL}/feed/maarssen?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("city_feed_new_dominant_pol.json"),
     )
     await authenticated_client.get_by_city("maarssen")
     assert (
@@ -86,38 +77,29 @@ async def test_new_dominant_pol(
 
 
 async def test_unknown_dominant_pol(
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     authenticated_client: WAQIClient,
 ) -> None:
     """Test retrieving unknown dominant pol."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/maarssen?token=test",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("city_feed_unknown_dominant_pol.json"),
-        ),
-        match_querystring=True,
+    responses.get(
+        f"{WAQI_URL}/feed/maarssen?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("city_feed_unknown_dominant_pol.json"),
     )
     air_quality = await authenticated_client.get_by_city("maarssen")
     assert air_quality.dominant_pollutant is None
 
 
 async def test_own_session(
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
 ) -> None:
     """Test creating own session."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/utrecht",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("city_feed_utrecht.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/utrecht?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("city_feed_utrecht.json"),
     )
     async with WAQIClient() as waqi:
         assert waqi.session is None
@@ -128,18 +110,14 @@ async def test_own_session(
 
 async def test_unexpected_server_response(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
 ) -> None:
     """Test handling unexpected response."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/utrecht",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "plain/text"},
-            text="Yes",
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/utrecht?token=test",
+        status=200,
+        headers={"Content-Type": "plain/text"},
+        body="Yes",
     )
     with pytest.raises(WAQIError):
         assert await authenticated_client.get_by_city("utrecht")
@@ -147,18 +125,14 @@ async def test_unexpected_server_response(
 
 async def test_unknown_city(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
 ) -> None:
     """Test unknown city."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/unknown",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("city_feed_unknown.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/unknown?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("city_feed_unknown.json"),
     )
     with pytest.raises(WAQIError):
         assert await authenticated_client.get_by_city("unknown")
@@ -166,37 +140,31 @@ async def test_unknown_city(
 
 async def test_unauthenticated(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
 ) -> None:
     """Test unauthenticated."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/utrecht",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("unauthenticated.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/utrecht?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("unauthenticated.json"),
     )
     with pytest.raises(WAQIAuthenticationError):
         assert await authenticated_client.get_by_city("utrecht")
 
 
-async def test_timeout(aresponses: ResponsesMockServer) -> None:
+async def test_timeout(responses: aiointercept) -> None:
     """Test request timeout."""
 
     # Faking a timeout by sleeping
-    async def response_handler(_: BaseRequest) -> Response:
+    async def response_handler(_url: URL, **_kwargs: Any) -> CallbackResult:
         """Response handler for this test."""
         await asyncio.sleep(2)
-        return aresponses.Response(body="Goodmorning!")
+        return CallbackResult(body="Goodmorning!")
 
-    aresponses.add(
-        WAQI_URL,
-        "/feed/utrecht",
-        "GET",
-        response_handler,
+    responses.get(
+        f"{WAQI_URL}/feed/utrecht?token=test",
+        callback=response_handler,
     )
     async with aiohttp.ClientSession() as session:
         waqi = WAQIClient(session=session, request_timeout=1)
@@ -216,21 +184,16 @@ async def test_timeout(aresponses: ResponsesMockServer) -> None:
 )
 async def test_search(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     keyword: str,
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test searching stations."""
-    aresponses.add(
-        WAQI_URL,
-        f"/search/?keyword={keyword}&token=test",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture(f"search_{keyword}.json"),
-        ),
-        match_querystring=True,
+    responses.get(
+        f"{WAQI_URL}/search/?keyword={keyword}&token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture(f"search_{keyword}.json"),
     )
     response: list[WAQISearchResult] = await authenticated_client.search(keyword)
     assert response == snapshot
@@ -245,21 +208,16 @@ async def test_search(
 )
 async def test_get_by_name(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     name: str,
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test getting stations by name."""
-    aresponses.add(
-        WAQI_URL,
-        f"/feed/{name}?token=test",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture(f"name_feed_{name}.json"),
-        ),
-        match_querystring=True,
+    responses.get(
+        f"{WAQI_URL}/feed/{name}?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture(f"name_feed_{name}.json"),
     )
     response = await authenticated_client.get_by_name(name)
     assert response == snapshot
@@ -267,18 +225,14 @@ async def test_get_by_name(
 
 async def test_get_unknown_by_name(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
 ) -> None:
     """Test getting unknown station by name."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/unknown",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("name_feed_unknown.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/unknown?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("name_feed_unknown.json"),
     )
     with pytest.raises(WAQIUnknownStationError):
         await authenticated_client.get_by_name("unknown")
@@ -295,21 +249,16 @@ async def test_get_unknown_by_name(
 )
 async def test_get_by_station_number(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     station_number: int,
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test getting stations by station_number."""
-    aresponses.add(
-        WAQI_URL,
-        f"/feed/@{station_number}?token=test",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture(f"station_number_feed_{station_number}.json"),
-        ),
-        match_querystring=True,
+    responses.get(
+        f"{WAQI_URL}/feed/@{station_number}?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture(f"station_number_feed_{station_number}.json"),
     )
     response = await authenticated_client.get_by_station_number(station_number)
     assert response == snapshot
@@ -325,19 +274,15 @@ async def test_get_by_station_number(
 )
 async def test_get_unknown_by_station_number(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     identifier: str,
 ) -> None:
     """Test getting unknown station by station_number."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/@0",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture(f"station_number_feed_{identifier}.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/@0?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture(f"station_number_feed_{identifier}.json"),
     )
     with pytest.raises(WAQIUnknownStationError):
         await authenticated_client.get_by_station_number(0)
@@ -345,19 +290,15 @@ async def test_get_unknown_by_station_number(
 
 async def test_get_by_coordinates(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test getting measuring station via coordinates."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/geo:52.105031;5.124464",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("coordinates.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/geo:52.105031;5.124464?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("coordinates.json"),
     )
     response = await authenticated_client.get_by_coordinates(52.105031, 5.124464)
     assert response == snapshot
@@ -365,19 +306,15 @@ async def test_get_by_coordinates(
 
 async def test_get_by_ip(
     authenticated_client: WAQIClient,
-    aresponses: ResponsesMockServer,
+    responses: aiointercept,
     snapshot: SnapshotAssertion,
 ) -> None:
     """Test getting measuring station via ip."""
-    aresponses.add(
-        WAQI_URL,
-        "/feed/here",
-        "GET",
-        aresponses.Response(
-            status=200,
-            headers={"Content-Type": "application/json"},
-            text=load_fixture("here.json"),
-        ),
+    responses.get(
+        f"{WAQI_URL}/feed/here?token=test",
+        status=200,
+        headers={"Content-Type": "application/json"},
+        body=load_fixture("here.json"),
     )
     response = await authenticated_client.get_by_ip()
     assert response == snapshot
